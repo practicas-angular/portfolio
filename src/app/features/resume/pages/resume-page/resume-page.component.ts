@@ -10,13 +10,24 @@ import { gsap } from 'gsap';
 import { MatChipsModule } from '@angular/material/chips';
 import { ExperienceCardComponent } from '../../components/experience-card/experience-card.component';
 import { Experience } from '../../models/resume.interface';
+import { ProjectCarouselComponent } from '../../components/project-carousel/project-carousel.component';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-resume-page',
   standalone: true,
-  imports: [CommonModule, ExperienceCardComponent, MatChipsModule],
+  imports: [
+    CommonModule,
+    ExperienceCardComponent,
+    MatChipsModule,
+    ProjectCarouselComponent,
+    MatIcon
+],
   template: `
-    <div class="resume-wrapper container">
+    <div
+      class="resume-container container"
+      style="padding-top: var(--spacing-8); padding-bottom: var(--spacing-16);"
+    >
       <!-- Encabezado Estratégico -->
       <header class="gsap-reveal">
         <h1>José Gabino Muriel Sánchez</h1>
@@ -61,6 +72,21 @@ import { Experience } from '../../models/resume.interface';
         </mat-chip-set>
       </section>
 
+      <section
+        class="gsap-reveal projects-section"
+        style="margin-top: var(--spacing-12); margin-bottom: var(--spacing-12);"
+      >
+        <div class="section-header" style="margin-bottom: var(--spacing-6);">
+          <h2><mat-icon color="accent">code</mat-icon> Proyectos Destacados</h2>
+          <p class="text-muted">
+            Explora mis aplicaciones y arquitecturas más recientes.
+          </p>
+        </div>
+
+        <!-- 3. Inject the Carousel Component here -->
+        <app-project-carousel></app-project-carousel>
+      </section>
+
       <!-- Experiencia Reframing (Foco en Soft Skills) -->
       <section class="experience-section">
         <h3>Experiencia Internacional y Gestión</h3>
@@ -69,6 +95,7 @@ import { Experience } from '../../models/resume.interface';
           <app-experience-card [experienceData]="job"></app-experience-card>
         }
       </section>
+      <img src="/assets/default-project.png" alt="Tech Stack Visual" />
     </div>
   `,
   styles: [
