@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Experience } from '../../models/resume.interface';
+import { Experience } from '../../models/experience.interface';
 
 @Component({
   selector: 'app-experience-card',

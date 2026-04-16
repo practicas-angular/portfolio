@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './core/header/header.component';
+import { HeaderComponent } from './core/components/header/header.component';
+import { FooterComponent } from "./core/components/footer/footer.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   template: `
-    <!-- The Application Shell Header -->
+
     <app-header></app-header>
-    
-    <!-- Main Content Area -->
     <main class="container">
       <router-outlet></router-outlet>
     </main>
+    <app-footer></app-footer>
   `,
   styles: [`
     main {
@@ -23,4 +23,4 @@ import { HeaderComponent } from './core/header/header.component';
     }
   `]
 })
-export class AppComponent {}
+export class AppComponent { }

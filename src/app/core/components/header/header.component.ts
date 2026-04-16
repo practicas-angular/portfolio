@@ -1,12 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, signal, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router'; // Added for routerLink
-import { I18nService, Language } from '../services/i18n.service';
-import { AuthService } from '../services/auth.service';
+import { I18nService, Language } from '../../services/i18n.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -58,28 +58,22 @@ import { AuthService } from '../services/auth.service';
         <button mat-menu-item (click)="changeLang('pt')">Português</button>
       </mat-menu>
 
-      @if (auth.currentUser().role === 'Guest') {
-        <button
-          mat-raised-button
-          class="login-button"
-          [disabled]="auth.isLoading()"
-          (click)="simulateSignup()"
-        >
-          {{ auth.isLoading() ? 'Cargando...' : 'Crear Cuenta (Mock)' }}
-        </button>
-      } @else {
-        <span style="margin-left: 1rem; color: var(--color-text-inverse);">
-          Hola, {{ auth.currentUser().username }}
-        </span>
-        <button
-          mat-raised-button
-          color="warn"
-          class="logout-button"
-          style="margin-left: 1rem;"
-          (click)="logout()"
-        >
-          Salir
-        </button>
+      @if (isBrowserReady()) {
+        
+        @if (auth.currentUser().role === 'Guest') {
+          <button mat-raised-button class="login-button" 
+                  [disabled]="auth.isLoading()" 
+                  (click)="simulateSignup()">
+            {{ auth.isLoading() ? 'Cargando...' : 'Crear Cuenta (Mock)' }}
+          </button>
+        } @else {
+          <span style="margin-left: 1rem; color: var(--color-text-inverse);">
+            Hola, {{ auth.currentUser().username }}
+          </span>
+          <button mat-raised-button color="warn" class="logout-button" style="margin-left: 1rem;" (click)="logout()">
+            Salir
+          </button>
+        }
       }
     </mat-toolbar>
   `,
@@ -113,7 +107,17 @@ import { AuthService } from '../services/auth.service';
 })
 export class HeaderComponent {
   i18n = inject(I18nService);
-  auth = inject(AuthService); // Inject the new Auth Service
+  auth = inject(AuthService);
+  isBrowserReady = signal<boolean>(false);
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
+  ngOnInit() {
+    // Only set this to true when the browser has taken over
+    if (isPlatformBrowser(this.platformId)) {
+      this.isBrowserReady.set(true);
+    }
+  }
 
   loginAs(username: string, role: 'Admin' | 'User') {
     // This now triggers the mock login API, waits 1.5s, and updates the UI automatically

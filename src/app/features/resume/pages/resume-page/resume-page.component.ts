@@ -9,9 +9,11 @@ import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { gsap } from 'gsap';
 import { MatChipsModule } from '@angular/material/chips';
 import { ExperienceCardComponent } from '../../components/experience-card/experience-card.component';
-import { Experience } from '../../models/resume.interface';
+import { Experience } from '../../models/experience.interface';
 import { ProjectCarouselComponent } from '../../components/project-carousel/project-carousel.component';
 import { MatIcon } from "@angular/material/icon";
+import { EDUCATION_DATA, JOB_EXPERIENCE } from '../../constants/resume.data';
+import { MatCardContent, MatCardSubtitle, MatCardTitle, MatCardHeader, MatCard } from "@angular/material/card";
 
 @Component({
   selector: 'app-resume-page',
@@ -21,8 +23,13 @@ import { MatIcon } from "@angular/material/icon";
     ExperienceCardComponent,
     MatChipsModule,
     ProjectCarouselComponent,
-    MatIcon
-],
+    MatIcon,
+    MatCardContent,
+    MatCardSubtitle,
+    MatCardTitle,
+    MatCardHeader,
+    MatCard
+  ],
   template: `
     <div
       class="resume-container container"
@@ -32,12 +39,12 @@ import { MatIcon } from "@angular/material/icon";
       <header class="gsap-reveal">
         <h1>José Gabino Muriel Sánchez</h1>
         <h2 class="text-accent">
-          Desarrollador de Software | Ingeniero Internacional
+          Desarrollador de Software | Ingeniero mecánico I+D
         </h2>
         <p>
           Profesional con mentalidad analítica y experiencia internacional en
           Europa. Transicionando de la ingeniería de I+D hacia el desarrollo de
-          software, aportando habilidades avanzadas en resolución de problemas,
+          software, aportando habilidades en resolución de problemas,
           gestión de proyectos y aprendizaje rápido de nuevas tecnologías.
         </p>
       </header>
@@ -58,16 +65,16 @@ import { MatIcon } from "@angular/material/icon";
           Intermedio / En Desarrollo
         </h4>
         <mat-chip-set>
-          <mat-chip color="accent">Angular (Signals, Standalone)</mat-chip>
           <mat-chip>React</mat-chip>
-          <mat-chip>Tailwind CSS</mat-chip>
           <mat-chip>Python</mat-chip>
+          <mat-chip color="accent">Angular</mat-chip>
+          <mat-chip>Tailwind CSS</mat-chip>
         </mat-chip-set>
 
         <h4 class="text-muted" style="margin-top: 1rem;">Análisis de Datos</h4>
         <mat-chip-set>
           <mat-chip>PowerBI</mat-chip>
-          <mat-chip>Excel Avanzado</mat-chip>
+          <mat-chip>Excel</mat-chip>
           <mat-chip>Análisis Estadístico</mat-chip>
         </mat-chip-set>
       </section>
@@ -88,21 +95,48 @@ import { MatIcon } from "@angular/material/icon";
       </section>
 
       <!-- Experiencia Reframing (Foco en Soft Skills) -->
-      <section class="experience-section">
-        <h3>Experiencia Internacional y Gestión</h3>
+      <section class="experience-section gsap-reveal">
+        <h2><mat-icon color="accent">work</mat-icon> Experiencia en I+D, soporte técnico y gestión</h2>
 
-        @for (job of jobExperience(); track job.company + job.period) {
+        @for (job of jobExperience; track job.company + job.period) {
           <app-experience-card [experienceData]="job"></app-experience-card>
         }
       </section>
-      <img src="/assets/default-project.png" alt="Tech Stack Visual" />
+
+      <section class="gsap-reveal education-section" style="margin-bottom: var(--spacing-12);">
+        <div class="section-header" style="margin-bottom: var(--spacing-6);">
+          <h2><mat-icon color="accent">school</mat-icon> Educación</h2>
+        </div>
+        
+        <div class="education-grid">
+          @for (edu of educationList; track edu.degree) {
+            <mat-card class="card-surface education-card">
+              <mat-card-header>
+                <div mat-card-avatar>
+                  <mat-icon class="education-icon" color="primary" style="transform: scale(1.5); margin-top: 8px;">account_balance</mat-icon>
+                </div>
+                <mat-card-title class="text-primary" style="margin-bottom: 4px;">{{ edu.degree }}</mat-card-title>
+                <mat-card-subtitle class="text-accent">{{ edu.institution }}</mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content style="margin-top: 1rem; margin-left: 2rem;">
+                <p class="text-muted" style="margin: 0;">
+                  <mat-icon inline="true" style="vertical-align: middle; font-size: 16px;">location_on</mat-icon> {{ edu.location }}
+                </p>
+                <p class="text-muted" style="margin: 0;">
+                  <mat-icon inline="true" style="vertical-align: middle; font-size: 16px;">calendar_today</mat-icon> {{ edu.period }}
+                </p>
+              </mat-card-content>
+            </mat-card>
+          }
+        </div>
+      </section>
     </div>
   `,
   styles: [
     `
-      .text-muted {
+    .text-muted {
         color: var(--color-text-muted);
-      }
+    }
       .text-accent {
         color: var(--color-accent);
         font-weight: var(--weight-medium);
@@ -117,54 +151,60 @@ import { MatIcon } from "@angular/material/icon";
       .experience-section {
         margin-top: var(--spacing-8);
       }
+      .section-header h2 {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-2);
+      }
       mat-chip {
         font-family: var(--font-secondary);
       }
+
+      .education-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-6);
+    }
+    @media (min-width: 768px) {
+      .education-grid { grid-template-columns: 1fr 1fr; }
+      .education-icon{ 
+        position: relative;
+        right: 10px;
+      }
+    }
+    
+    .education-card {
+      border-left: 4px solid var(--color-accent); /* Adds a nice architectural touch */
+      height: 100%;
+    }
     `,
   ],
 })
 export class ResumePageComponent implements AfterViewInit {
   // Reactive state using Angular Signals
-  jobExperience = signal<Experience[]>([
-    {
-      role: 'Ingeniero de Servicio y Soporte Técnico',
-      company: 'Tembo',
-      location: 'España y Europa',
-      period: 'Agosto 2020 - Septiembre 2023',
-      description: [
-        'Lideré la gestión de proyectos y el soporte técnico a nivel internacional, resolviendo problemas complejos en tiempo real para clientes en toda Europa.',
-        'Desarrollé fuertes habilidades de comunicación transversal y adaptación en entornos multiculturales.',
-      ],
-    },
-    {
-      role: 'Ingeniero de Concepto / I+D',
-      company: 'Tembo',
-      location: 'Kampen, Países Bajos',
-      period: 'Septiembre 2018 - Enero 2020',
-      description: [
-        'Aplicación de análisis de datos y modelado estadístico para optimizar procesos de I+D.',
-        'Implementación de Diseño de Experimentos (DOE) y Control de Calidad Interno (IQC), demostrando un enfoque altamente analítico y metódico.',
-      ],
-    },
-  ]);
+  jobExperience = JOB_EXPERIENCE
+  educationList = EDUCATION_DATA;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngAfterViewInit() {
-    // Guard the GSAP animation
     if (isPlatformBrowser(this.platformId)) {
-      gsap.fromTo(
-        '.gsap-reveal',
-        { y: 40, opacity: 0, visibility: 'hidden' },
-        {
-          y: 0,
-          opacity: 1,
-          visibility: 'visible',
-          duration: 0.8,
-          stagger: 0.15,
-          ease: 'power3.out',
-        },
-      );
+
+      // Add a small 100ms delay to ensure Angular SSR hydration is 100% complete
+      setTimeout(() => {
+        gsap.fromTo('.gsap-reveal',
+          { y: 40, opacity: 0, visibility: 'hidden' },
+          {
+            y: 0,
+            opacity: 1,
+            visibility: 'visible',
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out'
+          }
+        );
+      }, 100);
+
     }
   }
 }
