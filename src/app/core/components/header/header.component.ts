@@ -30,9 +30,13 @@ import { AuthService } from '../../services/auth.service';
       <button mat-button class="nav-button" routerLink="/">
         {{ i18n.translations()?.experience || '...' }}
       </button>
+      @if (isBrowserReady()) {
+        
+        @if (auth.currentUser().role !== 'Guest') {
       <button mat-button class="nav-button" routerLink="/dashboard">
         {{ i18n.translations()?.dashboard || '...' }}
       </button>
+        }}
 
       <button mat-button class="nav-button" [matMenuTriggerFor]="roleMenu">
         <mat-icon>security</mat-icon>

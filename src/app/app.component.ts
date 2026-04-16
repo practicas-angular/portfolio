@@ -10,7 +10,7 @@ import { FooterComponent } from "./core/components/footer/footer.component";
   template: `
 
     <app-header></app-header>
-    <main class="container">
+    <main class="main-content">
       <router-outlet></router-outlet>
     </main>
     <app-footer></app-footer>

@@ -11,9 +11,13 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ExperienceCardComponent } from '../../components/experience-card/experience-card.component';
 import { Experience } from '../../models/experience.interface';
 import { ProjectCarouselComponent } from '../../components/project-carousel/project-carousel.component';
-import { MatIcon } from "@angular/material/icon";
+import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { EDUCATION_DATA, JOB_EXPERIENCE } from '../../constants/resume.data';
-import { MatCardContent, MatCardSubtitle, MatCardTitle, MatCardHeader, MatCard } from "@angular/material/card";
+import { MatCardContent, MatCardSubtitle, MatCardTitle, MatCardHeader, MatCard, MatCardModule } from "@angular/material/card";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { MatButtonModule } from '@angular/material/button';
+
+gsap.registerPlugin(ScrollTrigger);
 
 @Component({
   selector: 'app-resume-page',
@@ -28,26 +32,56 @@ import { MatCardContent, MatCardSubtitle, MatCardTitle, MatCardHeader, MatCard }
     MatCardSubtitle,
     MatCardTitle,
     MatCardHeader,
-    MatCard
+    MatCard,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule
   ],
   template: `
-    <div
-      class="resume-container container"
-      style="padding-top: var(--spacing-8); padding-bottom: var(--spacing-16);"
-    >
-      <!-- Encabezado Estratégico -->
-      <header class="gsap-reveal">
-        <h1>José Gabino Muriel Sánchez</h1>
-        <h2 class="text-accent">
-          Desarrollador de Software | Ingeniero mecánico I+D
-        </h2>
+
+  <!-- Controles flotantes (Se ocultarán en móviles) -->
+    <div class="clutch-controls gsap-reveal">
+      <p class="text-muted" style="margin-bottom: 4px; font-size: 12px; font-weight: bold;">MECANISMO</p>
+      <div style="display: flex; gap: 8px;">
+        <button mat-raised-button color="primary" 
+                (click)="toggleClutch(true)" 
+                [disabled]="isCoupled()">
+          <mat-icon>link</mat-icon> Engranar
+        </button>
+        <button mat-raised-button color="warn" 
+                (click)="toggleClutch(false)" 
+                [disabled]="!isCoupled()">
+          <mat-icon>link_off</mat-icon> Desengranar
+        </button>
+      </div>
+    </div>
+
+    <div class="resume-page-wrapper" style="position: relative;">
+
+    <div class="mechanical-system">
+      <!-- La Cremallera (Rack) -->
+      <div class="rack"></div>
+      
+      <!-- El Engranaje (Gear) -->
+      <div class="gear-wrapper" [class.uncoupled]="!isCoupled()">
+        <!-- Sustituye la ruta por el nombre real de tu imagen -->
+        <img src="/assets/img/gear_rack/gear.png" class="gear-element" alt="Engranaje" />
+      </div>
+    </div>
+
+    <!-- Contenedor original del currículum (sin el wrapper extra) -->
+    <div class="resume-container container" style="padding-top: var(--spacing-8); padding-bottom: var(--spacing-16);">
+      
+      <section class="gsap-reveal">
+        <h1 class="text-primary">José Gabino Muriel Sánchez</h1>
+        <h2 class="text-accent">Desarrollador de Software | Ingeniero Mecánico I+D</h2>
         <p>
           Profesional con mentalidad analítica y experiencia internacional en
           Europa. Transicionando de la ingeniería de I+D hacia el desarrollo de
           software, aportando habilidades en resolución de problemas,
           gestión de proyectos y aprendizaje rápido de nuevas tecnologías.
         </p>
-      </header>
+      </section>
 
       <!-- Tecnologías y Lenguajes (Foco Principal) -->
       <section class="skills-section gsap-reveal">
@@ -131,6 +165,7 @@ import { MatCardContent, MatCardSubtitle, MatCardTitle, MatCardHeader, MatCard }
         </div>
       </section>
     </div>
+    </div>   
   `,
   styles: [
     `
@@ -177,6 +212,82 @@ import { MatCardContent, MatCardSubtitle, MatCardTitle, MatCardHeader, MatCard }
       border-left: 4px solid var(--color-accent); /* Adds a nice architectural touch */
       height: 100%;
     }
+
+    @media (min-width: 1024px) {
+      .resume-content-wrapper {
+        padding-left: 140px; 
+      }
+    }
+    
+    /* 1. Ocultar los controles y el mecanismo por defecto (para móviles y tablets pequeñas) */
+    .clutch-controls, .mechanical-system {
+      display: none;
+    }
+
+    /* 2. Mostrar el mecanismo SOLO en pantallas grandes donde tienes margen suficiente (> 1200px) */
+    @media (min-width: 1450px) {
+      
+      .clutch-controls {
+        display: block; /* Vuelve a mostrar los botones */
+        position: fixed;
+        bottom: var(--spacing-8);
+        right: var(--spacing-8);
+        z-index: 50;
+        background: var(--color-bg-surface);
+        padding: var(--spacing-4);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--shadow-lg);
+        border-left: 4px solid var(--color-accent);
+      }
+
+      /* Posición absoluta referenciada a la página para usar el margen izquierdo gigante */
+      .mechanical-system {
+        display: block; /* Vuelve a mostrar el mecanismo */
+        position: absolute;
+        top: 0;
+        left: 0; /* Separación desde el borde de la pantalla */
+        width: 150px; /* Espacio para que quepa todo */
+        height: 105%;
+        z-index: -1; /* Lo mantiene por detrás para que no moleste a los clicks */
+        pointer-events: none;
+      }
+
+      /* LA CREMALLERA REPETIDA */
+      .rack {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        width: 40px; /* AJUSTA este valor al grosor de tu imagen de cremallera */
+        height: 100%;
+        
+        /* El truco para repetir la imagen de 1/5 infinitamente: */
+        background-image: url('/assets/img/gear_rack/rack.png'); /* Sustituye por tu ruta */
+        background-repeat: repeat-y; 
+        background-size: 100% auto; /* Asegura que el ancho encaje y el alto mantenga la proporción */
+      }
+
+      .gear-wrapper {
+        position: sticky;
+        top: 10vh;
+        left: 36px; /* AJUSTA este valor para que los dientes encajen con los de la cremallera */
+        width: 100px;
+        height: 100px;
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        will-change: transform;
+      }
+
+      .gear-wrapper.uncoupled {
+        transform: translateX(100px);
+      }
+
+      /* TU IMAGEN DE ENGRANAJE DE 100x100 */
+      .gear-element {
+        width: 100px;
+        height: 100px;
+        object-fit: contain; /* Evita que la imagen se deforme */
+        will-change: transform;
+      }
+    }
     `,
   ],
 })
@@ -185,26 +296,49 @@ export class ResumePageComponent implements AfterViewInit {
   jobExperience = JOB_EXPERIENCE
   educationList = EDUCATION_DATA;
 
+  isCoupled = signal(false);
+  private currentRotation = 0;
+  private previousScrollY = 0;
+
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
+  toggleClutch(state: boolean) {
+    this.isCoupled.set(state);
+  }
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
+      [7]
 
-      // Add a small 100ms delay to ensure Angular SSR hydration is 100% complete
+      // Keep your existing GSAP reveal animation
       setTimeout(() => {
         gsap.fromTo('.gsap-reveal',
           { y: 40, opacity: 0, visibility: 'hidden' },
-          {
-            y: 0,
-            opacity: 1,
-            visibility: 'visible',
-            duration: 0.8,
-            stagger: 0.15,
-            ease: 'power3.out'
-          }
+          { y: 0, opacity: 1, visibility: 'visible', duration: 0.8, stagger: 0.15, ease: 'power3.out' }
         );
       }, 100);
 
+      ScrollTrigger.create({
+        // Remove the 'trigger' property completely. 
+        // start: 0 means the absolute top of the page.
+        // end: 'max' means the absolute bottom of the scrollable page.
+        start: 0,
+        end: 'max',
+        onUpdate: (self) => {
+          const scrollY = self.scroll();
+          const delta = scrollY - this.previousScrollY;
+          this.previousScrollY = scrollY;
+
+          if (this.isCoupled()) {
+            // This relationship is already strictly linear! 
+            // 1 pixel of scroll = 0.6 degrees of rotation.
+            this.currentRotation += delta * 0.6;
+
+            // gsap.set applies it instantly without any easing delays
+            gsap.set('.gear-element', { rotation: this.currentRotation });
+          }
+        }
+      });
     }
   }
 }
