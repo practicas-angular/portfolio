@@ -104,7 +104,7 @@ export const JOB_EXPERIENCE: Experience[] = [
         location: 'Nunspeet, Países Bajos',
         period: 'Febrero 2020 - Julio 2020',
         description: [
-            'Gestión de proyectos y diseño técnico',
+            'Gestión de proyectos y diseño técnico.',
             'Soporte de ventas y supervisión de fabicación y ensamblaje.',
         ],
     },

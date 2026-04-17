@@ -7,7 +7,7 @@ import { Experience } from '../../models/experience.interface';
   standalone: true,
   imports: [MatCardModule],
   template: `
-    <mat-card class="card-surface gsap-reveal">
+    <mat-card class="card-surface">
       <mat-card-header>
         <mat-card-title
           >{{ experienceData().role }} -
