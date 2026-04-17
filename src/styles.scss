@@ -63,6 +63,20 @@
   --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Add this below your existing :root variables */
+body[data-theme="dark"] {
+  --color-primary: #f8fafc; /* Make headers light */
+  --color-primary-light: #94a3b8;
+  --color-bg-default: #0f172a; /* Deep slate background */
+  --color-bg-surface: #1e293b; /* Darker cards */
+  --color-bg-inverse: #020617; /* Even darker footer */
+  
+  --color-text-main: #f8fafc; /* White text */
+  --color-text-muted: #94a3b8; /* Light gray text */
+  
+  /* You can leave --color-accent as #0ea5e9 because it looks great in both modes! */
+}
+
 /* ==========================================================================
    CSS Reset & Base Styles
    ========================================================================== */

@@ -1,4 +1,11 @@
-import { Component, inject, signal, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  Inject,
+  PLATFORM_ID,
+  OnInit,
+} from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router'; // Added for routerLink
 import { I18nService, Language } from '../../services/i18n.service';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header',
@@ -26,17 +34,33 @@ import { AuthService } from '../../services/auth.service';
       >
       <span class="spacer"></span>
 
-      <!-- Using routerLink to navigate -->
+      <button mat-button [matMenuTriggerFor]="contactMenu" class="nav-button">
+        <mat-icon>contact_mail</mat-icon> Contacto
+      </button>
+      <mat-menu #contactMenu="matMenu">
+        <button
+          mat-menu-item
+          (click)="copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')"
+        >
+          <mat-icon>email</mat-icon> gabino.muriel.sanchez&#64;gmail.com
+        </button>
+        <button
+          mat-menu-item
+          (click)="copyToClipboard('+34 669 264 151', 'Teléfono')"
+        >
+          <mat-icon>phone</mat-icon> +34 669 264 151
+        </button>
+      </mat-menu>
       <button mat-button class="nav-button" routerLink="/">
         {{ i18n.translations()?.experience || '...' }}
       </button>
       @if (isBrowserReady()) {
-        
         @if (auth.currentUser().role !== 'Guest') {
-      <button mat-button class="nav-button" routerLink="/dashboard">
-        {{ i18n.translations()?.dashboard || '...' }}
-      </button>
-        }}
+          <button mat-button class="nav-button" routerLink="/dashboard">
+            {{ i18n.translations()?.dashboard || '...' }}
+          </button>
+        }
+      }
 
       <button mat-button class="nav-button" [matMenuTriggerFor]="roleMenu">
         <mat-icon>security</mat-icon>
@@ -62,19 +86,36 @@ import { AuthService } from '../../services/auth.service';
         <button mat-menu-item (click)="changeLang('pt')">Português</button>
       </mat-menu>
 
+      <button
+        mat-icon-button
+        (click)="toggleTheme()"
+        matTooltip="Alternar Tema"
+        class="nav-button"
+      >
+        <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+
       @if (isBrowserReady()) {
-        
         @if (auth.currentUser().role === 'Guest') {
-          <button mat-raised-button class="login-button" 
-                  [disabled]="auth.isLoading()" 
-                  (click)="simulateSignup()">
+          <button
+            mat-raised-button
+            class="login-button"
+            [disabled]="auth.isLoading()"
+            (click)="simulateSignup()"
+          >
             {{ auth.isLoading() ? 'Cargando...' : 'Crear Cuenta (Mock)' }}
           </button>
         } @else {
           <span style="margin-left: 1rem; color: var(--color-text-inverse);">
             Hola, {{ auth.currentUser().username }}
           </span>
-          <button mat-raised-button color="warn" class="logout-button" style="margin-left: 1rem;" (click)="logout()">
+          <button
+            mat-raised-button
+            color="warn"
+            class="logout-button"
+            style="margin-left: 1rem;"
+            (click)="logout()"
+          >
             Salir
           </button>
         }
@@ -113,8 +154,9 @@ export class HeaderComponent {
   i18n = inject(I18nService);
   auth = inject(AuthService);
   isBrowserReady = signal<boolean>(false);
+  isDarkMode = signal<boolean>(false);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit() {
     // Only set this to true when the browser has taken over
@@ -156,5 +198,28 @@ export class HeaderComponent {
         console.log('Suscripción completada, usuario logueado:', res),
       error: (err) => console.error('Error de login', err),
     });
+  }
+
+  snackBar = inject(MatSnackBar);
+  copyToClipboard(text: string, type: string) {
+    navigator.clipboard.writeText(text).then(() => {
+      // Shows a sleek notification for 3 seconds
+      this.snackBar.open(`${type} copiado al portapapeles!`, 'Cerrar', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
+    });
+  }
+
+  toggleTheme() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isDarkMode.update((dark) => !dark);
+      if (this.isDarkMode()) {
+        document.body.setAttribute('data-theme', 'dark');
+      } else {
+        document.body.removeAttribute('data-theme');
+      }
+    }
   }
 }

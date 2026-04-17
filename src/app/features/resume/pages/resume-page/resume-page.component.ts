@@ -102,9 +102,37 @@ gsap.registerPlugin(ScrollTrigger);
       >
         <section class="gsap-reveal">
           <h1 class="text-primary">José Gabino Muriel Sánchez</h1>
+          <div
+            style="display: flex; gap: 1.5rem; margin-top: 0.2rem; margin-bottom: 1.5rem; flex-wrap: wrap;"
+          >
+            <span
+              class="text-muted"
+              style="display: flex; align-items: center; gap: 4px;"
+            >
+              <mat-icon inline="true" style="font-size: 10px;">email</mat-icon>
+              gabino.muriel.sanchez&#64;gmail.com
+            </span>
+            <span
+              class="text-muted"
+              style="display: flex; align-items: center; gap: 4px;"
+            >
+              <mat-icon inline="true" style="font-size: 10px;">phone</mat-icon>
+              +34 669 264 151
+            </span>
+            <span
+              class="text-muted"
+              style="display: flex; align-items: center; gap: 4px;"
+            >
+              <mat-icon inline="true" style="font-size: 10px;"
+                >location_on</mat-icon
+              >
+              Mérida (España)
+            </span>
+          </div>
           <h2 class="text-accent">
             Desarrollador de Software | Ingeniero Mecánico I+D
           </h2>
+
           <p>
             Profesional con mentalidad analítica y experiencia internacional en
             Europa. Transicionando de la ingeniería de I+D hacia el desarrollo
@@ -275,11 +303,10 @@ gsap.registerPlugin(ScrollTrigger);
         font-weight: var(--weight-medium);
       }
       header {
-        margin-bottom: var(--spacing-8);
         margin-top: var(--spacing-6);
       }
       .skills-section {
-        margin-bottom: var(--spacing-8);
+        margin-top: var(--spacing-12);
       }
       .experience-section {
         margin-top: var(--spacing-16);
@@ -497,7 +524,7 @@ export class ResumePageComponent implements AfterViewInit {
     this.isCoupled.set(state);
 
     if (isPlatformBrowser(this.platformId)) {
-      this.checkViewportAndScroll(); 
+      this.checkViewportAndScroll();
     }
   }
 

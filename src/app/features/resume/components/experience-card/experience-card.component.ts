@@ -19,10 +19,7 @@ import { Experience } from '../../models/experience.interface';
         >
       </mat-card-header>
       <mat-card-content>
-        <!-- Using modern Angular Control Flow syntax to loop through descriptions -->
-        @for (desc of experienceData().description; track $index) {
-          <p>{{ desc }}</p>
-        }
+        <p>{{ experienceData().description }}</p>
       </mat-card-content>
     </mat-card>
   `,
