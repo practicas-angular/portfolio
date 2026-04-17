@@ -282,7 +282,7 @@ gsap.registerPlugin(ScrollTrigger);
         margin-bottom: var(--spacing-8);
       }
       .experience-section {
-        margin-top: var(--spacing-8);
+        margin-top: var(--spacing-16);
       }
       .section-header h2 {
         display: flex;
@@ -477,10 +477,20 @@ export class ResumePageComponent implements AfterViewInit {
 
   toggleExperience() {
     this.showExperience.update((val) => !val);
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 50); // 50ms is unnoticeable to the user, but gives Angular time to render the cards
+    }
   }
 
   toggleEducation() {
     this.showEducation.update((val) => !val);
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 50);
+    }
   }
 
   toggleClutch(state: boolean) {
