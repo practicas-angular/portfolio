@@ -213,11 +213,11 @@ gsap.registerPlugin(ScrollTrigger);
       height: 100%;
     }
 
-    @media (min-width: 1024px) {
+   /*  @media (min-width: 1024px) {
       .resume-content-wrapper {
         padding-left: 140px; 
       }
-    }
+    } */
     
     /* 1. Ocultar los controles y el mecanismo por defecto (para móviles y tablets pequeñas) */
     .clutch-controls, .mechanical-system {
@@ -257,7 +257,7 @@ gsap.registerPlugin(ScrollTrigger);
         position: absolute;
         top: -40px;
         left: 0;
-        width: 40px; /* AJUSTA este valor al grosor de tu imagen de cremallera */
+        width: 30px; /* AJUSTA este valor al grosor de tu imagen de cremallera */
         height: 100%;
         
         /* El truco para repetir la imagen de 1/5 infinitamente: */
@@ -268,8 +268,8 @@ gsap.registerPlugin(ScrollTrigger);
 
       .gear-wrapper {
         position: sticky;
-        top: 10vh;
-        left: 36px; /* AJUSTA este valor para que los dientes encajen con los de la cremallera */
+        top: 155px;
+        left: 15px; 
         width: 100px;
         height: 100px;
         transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -277,7 +277,7 @@ gsap.registerPlugin(ScrollTrigger);
       }
 
       .gear-wrapper.uncoupled {
-        transform: translateX(100px);
+        transform: translateX(1.4rem);
       }
 
       /* TU IMAGEN DE ENGRANAJE DE 100x100 */
@@ -332,7 +332,7 @@ export class ResumePageComponent implements AfterViewInit {
           if (this.isCoupled()) {
             // This relationship is already strictly linear! 
             // 1 pixel of scroll = 0.6 degrees of rotation.
-            this.currentRotation += delta * 0.6;
+            this.currentRotation += delta * 1.15;
 
             // gsap.set applies it instantly without any easing delays
             gsap.set('.gear-element', { rotation: this.currentRotation });

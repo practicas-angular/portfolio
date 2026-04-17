@@ -137,6 +137,12 @@ a {
   padding: 0 var(--spacing-4);
 }
 
+@media (min-width: 1400px) {
+  .container {
+    width: 90vw;
+  }
+}
+
 /* Hide initially for GSAP to reveal and make the UI "pop" */
 .gsap-reveal {
   opacity: 0;
