@@ -1,17 +1,30 @@
 /* ==========================================================================
    Base Variables (:root)
    ========================================================================== */
+body[data-theme="dark"] {
+  --color-primary: #f8fafc;
+  --color-primary-light: #cbd5e1;
+  --color-accent: #38bdf8;
+  --color-accent-hover: #7dd3fc;
+
+  --color-bg-default: #0f172a;
+  --color-bg-surface: #1e293b;
+  --color-bg-inverse: #f8fafc;
+
+  --color-text-main: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-text-inverse: #0f172a;
+}
+
 :root {
-  /* Colors - Modern Engineering / Tech Palette */
-  --color-primary: #0f172a; /* Deep Slate - great for headers */
+  --color-primary: #0f172a;
   --color-primary-light: #334155;
-  --color-accent: #0ea5e9; /* Vibrant Blue - for highlights and active states */
+  --color-accent: #0ea5e9;
   --color-accent-hover: #0284c7;
 
-  /* Backgrounds & Surfaces */
-  --color-bg-default: #f8fafc; /* Very light gray/blue for the main background */
-  --color-bg-surface: #ffffff; /* White for cards/panels */
-  --color-bg-inverse: #1e293b; /* Dark background for footer or dark sections */
+  --color-bg-default: #f8fafc;
+  --color-bg-surface: #ffffff;
+  --color-bg-inverse: #1e293b;
 
   /* Text Colors */
   --color-text-main: #334155;
@@ -21,17 +34,26 @@
   /* Typography */
   --font-primary: "Inter", "Roboto", "Helvetica Neue", sans-serif;
   --font-secondary:
-    "Space Grotesk", "Montserrat", sans-serif; /* Good for technical headings */
+    "Space Grotesk", "Montserrat", sans-serif;
+  /* Good for technical headings */
 
   /* Font Sizes (Fluid Typography Scale) */
-  --text-xs: 0.75rem; /* 12px */
-  --text-sm: 0.875rem; /* 14px */
-  --text-base: 1rem; /* 16px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-2xl: 1.5rem; /* 24px */
-  --text-3xl: 1.875rem; /* 30px */
-  --text-4xl: 2.25rem; /* 36px */
+  --text-xs: 0.75rem;
+  /* 12px */
+  --text-sm: 0.875rem;
+  /* 14px */
+  --text-base: 1rem;
+  /* 16px */
+  --text-lg: 1.125rem;
+  /* 18px */
+  --text-xl: 1.25rem;
+  /* 20px */
+  --text-2xl: 1.5rem;
+  /* 24px */
+  --text-3xl: 1.875rem;
+  /* 30px */
+  --text-4xl: 2.25rem;
+  /* 36px */
 
   /* Font Weights */
   --weight-light: 300;
@@ -40,14 +62,22 @@
   --weight-bold: 700;
 
   /* Spacing System (Based on 8px grid) */
-  --spacing-1: 0.25rem; /* 4px */
-  --spacing-2: 0.5rem; /* 8px */
-  --spacing-3: 0.75rem; /* 12px */
-  --spacing-4: 1rem; /* 16px */
-  --spacing-6: 1.5rem; /* 24px */
-  --spacing-8: 2rem; /* 32px */
-  --spacing-12: 3rem; /* 48px */
-  --spacing-16: 4rem; /* 64px */
+  --spacing-1: 0.25rem;
+  /* 4px */
+  --spacing-2: 0.5rem;
+  /* 8px */
+  --spacing-3: 0.75rem;
+  /* 12px */
+  --spacing-4: 1rem;
+  /* 16px */
+  --spacing-6: 1.5rem;
+  /* 24px */
+  --spacing-8: 2rem;
+  /* 32px */
+  --spacing-12: 3rem;
+  /* 48px */
+  --spacing-16: 4rem;
+  /* 64px */
 
   /* Borders & Shadows */
   --border-radius-sm: 4px;
@@ -61,20 +91,6 @@
   /* Transitions (For standard UI, GSAP will handle complex animations) */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Add this below your existing :root variables */
-body[data-theme="dark"] {
-  --color-primary: #f8fafc; /* Make headers light */
-  --color-primary-light: #94a3b8;
-  --color-bg-default: #0f172a; /* Deep slate background */
-  --color-bg-surface: #1e293b; /* Darker cards */
-  --color-bg-inverse: #020617; /* Even darker footer */
-  
-  --color-text-main: #f8fafc; /* White text */
-  --color-text-muted: #94a3b8; /* Light gray text */
-  
-  /* You can leave --color-accent as #0ea5e9 because it looks great in both modes! */
 }
 
 /* ==========================================================================
@@ -122,15 +138,19 @@ h6 {
 h1 {
   font-size: var(--text-4xl);
 }
+
 h2 {
   font-size: var(--text-3xl);
 }
+
 h3 {
   font-size: var(--text-2xl);
 }
+
 p {
   margin-bottom: var(--spacing-4);
 }
+
 a {
   color: var(--color-accent);
   text-decoration: none;
