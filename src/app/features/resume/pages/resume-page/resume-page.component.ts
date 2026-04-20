@@ -373,6 +373,7 @@ gsap.registerPlugin(ScrollTrigger);
           background-image: url('/assets/img/gear_rack/rack.png'); /* Sustituye por tu ruta */
           background-repeat: repeat-y;
           background-size: 100% auto; /* Asegura que el ancho encaje y el alto mantenga la proporción */
+          filter: var(--img-theme-filter);
         }
 
         .gear-wrapper {
@@ -383,6 +384,7 @@ gsap.registerPlugin(ScrollTrigger);
           height: 100px;
           transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
           will-change: transform;
+          filter: var(--img-theme-filter);
         }
 
         .gear-wrapper.uncoupled {
