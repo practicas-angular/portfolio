@@ -23,7 +23,7 @@
     "PORTFOLIO": "Portfólio",
     "CONTACT": "Contato",
     "EXPERIENCE": "Experiência",
-    "DASHBOARD": "Painel ao Vivo",
+    "DASHBOARD": "Painel de Dados",
     "ROLE": "Função",
     "ROLES": {
       "ADMIN": "Administrador",
@@ -36,6 +36,7 @@
       "ENGLISH": "Inglês",
       "PORTUGUESE": "Português"
     },
+    "SWITCH_THEME" : "Mudar tema",
     "CREATE_ACCOUNT_MOCKS": "Criar Conta (Mock)",
     "WELCOME": "Bem-vindo"
   },

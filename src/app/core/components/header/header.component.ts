@@ -39,92 +39,200 @@ import { LANGUAGES } from '../../constants/core.data';
       >
       <span class="spacer"></span>
 
-      <button mat-button [matMenuTriggerFor]="contactMenu" class="nav-button">
-        <mat-icon>contact_mail</mat-icon> Contacto
-      </button>
-      <mat-menu #contactMenu="matMenu">
-        <button
-          mat-menu-item
-          (click)="copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')"
-        >
-          <mat-icon>email</mat-icon> gabino.muriel.sanchez&#64;gmail.com
+      <!-- ========================================= -->
+      <!-- DESKTOP NAVIGATION (Hidden < 1450px)      -->
+      <!-- ========================================= -->
+       <div class="desktop-nav">
+        <button mat-button [matMenuTriggerFor]="contactMenu" class="nav-button">
+          <mat-icon>contact_mail</mat-icon> Contacto
         </button>
-        <button
-          mat-menu-item
-          (click)="copyToClipboard('+34 669 264 151', 'Teléfono')"
-        >
-          <mat-icon>phone</mat-icon> +34 669 264 151
-        </button>
-      </mat-menu>
-      <button mat-button class="nav-button" routerLink="/">
-        {{ "NAVBAR.EXPERIENCE" | translate}}
-      </button>
-      @if (isBrowserReady()) {
-        @if (auth.currentUser().role !== 'Guest') {
-          <button mat-button class="nav-button" routerLink="/dashboard">
-            {{ "NAVBAR.DASHBOARD" | translate}}
-          </button>
-        }
-      }
-
-      <button mat-button class="nav-button" [matMenuTriggerFor]="roleMenu">
-        <mat-icon>security</mat-icon>
-        {{ "NAVBAR.ROLE" | translate}}: {{ auth.currentUser().role }}
-      </button>
-      <mat-menu #roleMenu="matMenu">
-        <button mat-menu-item (click)="loginAs('Gabino (Admin)', 'Admin')">
-          {{ "NAVBAR.ROLES.ADMIN" | translate}}
-        </button>
-        <button mat-menu-item (click)="loginAs('Reclutador', 'User')">
-          {{ "NAVBAR.ROLES.USER" | translate}}
-        </button>
-        <button mat-menu-item (click)="logout()">{{ "NAVBAR.ROLES.GUEST" | translate}} ({{ "COMMON.LOGOUT" | translate}})</button>
-      </mat-menu>
-
-      <button mat-button class="nav-button" [matMenuTriggerFor]="langMenu">
-        <mat-icon>language</mat-icon>
-        {{ "NAVBAR.LANGUAGE" | translate}}
-      </button>
-      <mat-menu #langMenu="matMenu">
-        <button mat-menu-item (click)="changeLang('es')">{{ "NAVBAR.LANGUAGES.SPANISH" | translate}}</button>
-        <button mat-menu-item (click)="changeLang('en')">{{ "NAVBAR.LANGUAGES.ENGLISH" | translate}}</button>
-        <button mat-menu-item (click)="changeLang('pt')">{{ "NAVBAR.LANGUAGES.PORTUGUESE" | translate}}</button>
-      </mat-menu>
-
-      <button
-        mat-icon-button
-        (click)="toggleTheme()"
-        matTooltip="Alternar Tema"
-        class="nav-button"
-      >
-        <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
-      </button>
-
-      @if (isBrowserReady()) {
-        @if (auth.currentUser().role === 'Guest') {
+        <mat-menu #contactMenu="matMenu">
           <button
-            mat-raised-button
-            class="login-button"
-            [disabled]="auth.isLoading()"
-            (click)="simulateSignup()"
+            mat-menu-item
+            (click)="copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')"
           >
-            {{ auth.isLoading() ? ("COMMON.LOADING" | translate) : ("COMMON.SIGNUP" | translate) }}
+            <mat-icon>email</mat-icon> gabino.muriel.sanchez&#64;gmail.com
           </button>
-        } @else {
-          <span style="margin-left: 1rem; color: var(--color-accent);">
-            {{ "NAVBAR.WELCOME" | translate}}, {{ auth.currentUser().username }}
-          </span>
           <button
-            mat-raised-button
-            color="warn"
-            class="logout-button"
-            style="margin-left: 1rem;"
-            (click)="logout()"
+            mat-menu-item
+            (click)="copyToClipboard('+34 669 264 151', 'Teléfono')"
           >
-            {{ "COMMON.EXIT" | translate}}
+            <mat-icon>phone</mat-icon> +34 669 264 151
           </button>
+        </mat-menu>
+        <button mat-button class="nav-button" routerLink="/">
+          {{ "NAVBAR.EXPERIENCE" | translate}}
+        </button>
+        @if (isBrowserReady()) {
+          @if (auth.currentUser().role !== 'Guest') {
+            <button mat-button class="nav-button" routerLink="/dashboard">
+              {{ "NAVBAR.DASHBOARD" | translate}}
+            </button>
+          }
         }
-      }
+
+        <button mat-button class="nav-button" [matMenuTriggerFor]="roleMenu">
+          <mat-icon>security</mat-icon>
+          {{ "NAVBAR.ROLE" | translate}}: {{ auth.currentUser().role }}
+        </button>
+        <mat-menu #roleMenu="matMenu">
+          <button mat-menu-item (click)="loginAs('Gabino (Admin)', 'Admin')">
+            {{ "NAVBAR.ROLES.ADMIN" | translate}}
+          </button>
+          <button mat-menu-item (click)="loginAs('Reclutador', 'User')">
+            {{ "NAVBAR.ROLES.USER" | translate}}
+          </button>
+          <button mat-menu-item (click)="logout()">{{ "NAVBAR.ROLES.GUEST" | translate}} ({{ "COMMON.LOGOUT" | translate}})</button>
+        </mat-menu>
+
+        <button mat-button class="nav-button" [matMenuTriggerFor]="langMenu">
+          <mat-icon>language</mat-icon>
+          {{ "NAVBAR.LANGUAGE" | translate}}
+        </button>
+        <mat-menu #langMenu="matMenu">
+          <button mat-menu-item (click)="changeLang('es')">{{ "NAVBAR.LANGUAGES.SPANISH" | translate}}</button>
+          <button mat-menu-item (click)="changeLang('en')">{{ "NAVBAR.LANGUAGES.ENGLISH" | translate}}</button>
+          <button mat-menu-item (click)="changeLang('pt')">{{ "NAVBAR.LANGUAGES.PORTUGUESE" | translate}}</button>
+        </mat-menu>
+
+        <button
+          mat-icon-button
+          (click)="toggleTheme()"
+          matTooltip="Alternar Tema"
+          class="nav-button"
+        >
+          <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
+
+        @if (isBrowserReady()) {
+          @if (auth.currentUser().role === 'Guest') {
+            <button
+              mat-raised-button
+              class="login-button"
+              [disabled]="auth.isLoading()"
+              (click)="simulateSignup()"
+            >
+              {{ auth.isLoading() ? ("COMMON.LOADING" | translate) : ("COMMON.SIGNUP" | translate) }}
+            </button>
+          } @else {
+            <span style="margin-left: 1rem; color: var(--color-accent);">
+              {{ "NAVBAR.WELCOME" | translate}}, {{ auth.currentUser().username }}
+            </span>
+            <button
+              mat-raised-button
+              color="warn"
+              class="logout-button"
+              style="margin-left: 1rem;"
+              (click)="logout()"
+            >
+              {{ "COMMON.EXIT" | translate}}
+            </button>
+          }
+        }
+      </div>
+
+      <!-- ========================================= -->
+      <!-- MOBILE NAVIGATION (Visible < 1450px)      -->
+      <!-- ========================================= -->
+      <!-- ========================================= -->
+      <!-- MOBILE NAVIGATION (Visible < 1450px)      -->
+      <!-- ========================================= -->
+      <div class="mobile-nav">
+        <!-- 1. El botón disparador (AHORA SE CIERRA ANTES DEL MENÚ) -->
+        <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="nav-button" aria-label="Menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+
+        <!-- 2. El Menú Principal Móvil -->
+        <mat-menu #mobileMenu="matMenu">
+          
+          <button mat-menu-item [matMenuTriggerFor]="contactMenu">
+            <mat-icon>contact_mail</mat-icon> 
+            <span>Contacto</span>
+          </button>
+
+          <button mat-menu-item routerLink="/">
+            <mat-icon>work</mat-icon>
+            <span>{{ "NAVBAR.EXPERIENCE" | translate}}</span>
+          </button>
+
+          @if (isBrowserReady()) {
+            @if (auth.currentUser().role !== 'Guest') {
+              <button mat-menu-item routerLink="/dashboard">
+                <mat-icon>dashboard</mat-icon>
+                <span>{{ "NAVBAR.DASHBOARD" | translate}}</span>
+              </button>
+            }
+          }
+
+          <button mat-menu-item [matMenuTriggerFor]="roleMenu">
+            <mat-icon>security</mat-icon>
+            <span>{{ "NAVBAR.ROLE" | translate}}: {{ auth.currentUser().role }}</span>
+          </button>
+
+          <button mat-menu-item [matMenuTriggerFor]="langMenu">
+            <mat-icon>language</mat-icon>
+            <span>{{ "NAVBAR.LANGUAGE" | translate}}</span>
+          </button>
+
+          <button mat-menu-item (click)="toggleTheme()">
+            <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+            <span>{{ "NAVBAR.SWITCH_THEME" | translate}}</span>
+          </button>
+
+          <!-- SECCIÓN DE AUTENTICACIÓN MÓVIL -->
+          @if (isBrowserReady()) {
+            @if (auth.currentUser().role === 'Guest') {
+              <button mat-menu-item [disabled]="auth.isLoading()" (click)="simulateSignup()">
+                <mat-icon>login</mat-icon>
+                <span>{{ auth.isLoading() ? ("COMMON.LOADING" | translate) : ("COMMON.SIGNUP" | translate) }}</span>
+              </button>
+            } @else {
+              <!-- Mensaje de bienvenida adaptado para menú móvil -->
+              <div style="padding: 8px 16px; font-size: var(--text-sm); color: var(--color-text-muted); outline: none; cursor: default;">
+                {{ "NAVBAR.WELCOME" | translate}}, <strong>{{ auth.currentUser().username }}</strong>
+              </div>
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span style="color: #f44336;">{{ "COMMON.EXIT" | translate}}</span>
+              </button>
+            }
+          }
+        </mat-menu>
+
+        <!-- ========================================= -->
+        <!-- SUB-MENÚS (Declarados fuera para limpieza)-->
+        <!-- ========================================= -->
+        <mat-menu #contactMenu="matMenu">
+          <button mat-menu-item (click)="copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')">
+            <mat-icon>email</mat-icon> 
+            <span>gabino.muriel.sanchez&#64;gmail.com</span>
+          </button>
+          <button mat-menu-item (click)="copyToClipboard('+34 669 264 151', 'Teléfono')">
+            <mat-icon>phone</mat-icon> 
+            <span>+34 669 264 151</span>
+          </button>
+        </mat-menu>
+
+        <mat-menu #roleMenu="matMenu">
+          <button mat-menu-item (click)="loginAs('Gabino (Admin)', 'Admin')">
+            {{ "NAVBAR.ROLES.ADMIN" | translate}}
+          </button>
+          <button mat-menu-item (click)="loginAs('Reclutador', 'User')">
+            {{ "NAVBAR.ROLES.USER" | translate}}
+          </button>
+          <button mat-menu-item (click)="logout()">
+            {{ "NAVBAR.ROLES.GUEST" | translate}} ({{ "COMMON.LOGOUT" | translate}})
+          </button>
+        </mat-menu>
+
+        <mat-menu #langMenu="matMenu">
+          <button mat-menu-item (click)="changeLang('es')">{{ "NAVBAR.LANGUAGES.SPANISH" | translate}}</button>
+          <button mat-menu-item (click)="changeLang('en')">{{ "NAVBAR.LANGUAGES.ENGLISH" | translate}}</button>
+          <button mat-menu-item (click)="changeLang('pt')">{{ "NAVBAR.LANGUAGES.PORTUGUESE" | translate}}</button>
+        </mat-menu>
+
+      </div>
     </mat-toolbar>
   `,
   styles: [
@@ -152,6 +260,12 @@ import { LANGUAGES } from '../../constants/core.data';
         background-color: var(--color-accent) !important;
         color: var(--color-text-inverse) !important;
       }
+
+      .mobile-nav { display: none; }
+      @media (max-width: 1450px) {
+      .desktop-nav { display: none; }
+      .mobile-nav { display: block; }
+    }
     `,
   ],
 })

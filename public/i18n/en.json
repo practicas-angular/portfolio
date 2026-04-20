@@ -23,7 +23,7 @@
     "PORTFOLIO": "Portfolio",
     "CONTACT": "Contact",
     "EXPERIENCE": "Experience",
-    "DASHBOARD": "Live Dashboard",
+    "DASHBOARD": "Dashboard",
     "ROLE": "Role",
     "ROLES": {
       "ADMIN": "Administrator",
@@ -36,6 +36,7 @@
       "ENGLISH": "English",
       "PORTUGUESE": "Portuguese"
     },
+    "SWITCH_THEME" : "Switch theme",
     "CREATE_ACCOUNT_MOCKS": "Create Account (Mock)",
     "WELCOME": "Welcome"
   },
