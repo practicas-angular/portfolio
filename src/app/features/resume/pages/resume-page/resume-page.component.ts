@@ -98,7 +98,7 @@ gsap.registerPlugin(ScrollTrigger);
         <section class="gsap-reveal">
           <h1 class="text-primary">José Gabino Muriel Sánchez</h1>
           <div
-            style="display: flex; gap: 1.5rem; margin-top: 0.2rem; margin-bottom: 1.5rem; flex-wrap: wrap;"
+            style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;"
           >
             <span
               class="text-muted"

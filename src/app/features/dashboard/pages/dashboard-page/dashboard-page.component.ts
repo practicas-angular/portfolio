@@ -6,6 +6,7 @@ import {
   Inject,
   PLATFORM_ID,
   inject,
+  effect,
 } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -19,6 +20,7 @@ import { WikipediaEdit } from '../../models/wikipedia.interface';
 import { AuthService } from '../../../../core/services/auth.service';
 import { PusherService } from '../../services/pusher.service';
 import { ActiveUsersService } from '../../services/active-users.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -242,6 +244,7 @@ import { ActiveUsersService } from '../../services/active-users.service';
         flex-direction: column;
         height: 400px;
         padding: 0;
+        margin-bottom: 20px;
       }
       .chat-messages {
         flex: 1;
@@ -306,6 +309,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   private sseSubscription!: Subscription;
 
   auth = inject(AuthService);
+  private router = inject(Router);
   pusherService = inject(PusherService);
   activeUsersService = inject(ActiveUsersService);
   newMessageInput = '';
@@ -313,7 +317,16 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   constructor(
     private wikiService: WikipediaSseService,
     @Inject(PLATFORM_ID) private platformId: Object,
-  ) {}
+  ) {
+    effect(() => {
+      const user = this.auth.currentUser(); // Assuming your signal is called currentUser
+      
+      // If there is no user, or their role is strictly 'Guest', redirect to home
+      if (!user || user.role === 'Guest') {
+        this.router.navigate(['/']);
+      }
+    });
+  }
 
   ngOnInit(): void {
     // 1. Reveal layout

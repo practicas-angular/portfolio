@@ -15,6 +15,8 @@ import { RouterModule } from '@angular/router'; // Added for routerLink
 import { I18nService, Language } from '../../services/i18n.service';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { SignupDialogComponent } from '../../../features/auth/components/signup-dialog/signup-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +27,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
-    RouterModule, // Needed to use routerLink
+    RouterModule,
+    MatDialogModule,
   ],
   template: `
     <mat-toolbar color="primary" class="header-toolbar">
@@ -155,6 +158,7 @@ export class HeaderComponent {
   auth = inject(AuthService);
   isBrowserReady = signal<boolean>(false);
   isDarkMode = signal<boolean>(false);
+  private dialog = inject(MatDialog);
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -188,15 +192,21 @@ export class HeaderComponent {
   simulateSignup() {
     // We mock a signup using the prompt API for quick username collection,
     // though in a real app this would be a reactive form.
-    const username =
-      prompt('Elige tu nombre de usuario para el chat:', 'Reclutador_Tech') ||
-      'Usuario_Nuevo';
+    const dialogRef = this.dialog.open(SignupDialogComponent, {
+      width: '350px',
+      autoFocus: 'first-tabbable',
+    });
 
     // Call the auth service which hits our mock interceptor
-    this.auth.signup(username, 'User').subscribe({
-      next: (res) =>
-        console.log('Suscripción completada, usuario logueado:', res),
-      error: (err) => console.error('Error de login', err),
+    dialogRef.afterClosed().subscribe((username: string | undefined) => {
+      // If the user clicked "Entrar" and returned a username, call the Auth API
+      if (username) {
+        this.auth.signup(username, 'User').subscribe({
+          next: (res) =>
+            console.log('Suscripción completada, usuario logueado:', res),
+          error: (err) => console.error('Error de login', err),
+        });
+      }
     });
   }
 
