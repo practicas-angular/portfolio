@@ -467,7 +467,7 @@ export class ResumePageComponent implements AfterViewInit {
   showExperience = signal(false);
   showEducation = signal(false);
 
-  isCoupled = signal(true);
+  isCoupled = signal(false);
   private currentRotation = 0;
   private previousScrollY = 0;
 
