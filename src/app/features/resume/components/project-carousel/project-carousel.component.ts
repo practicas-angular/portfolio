@@ -15,11 +15,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { Subscription, interval } from 'rxjs';
 import { DEFAULT_IMG_URL } from '../../../../core/constants/core.data';
 import { PROJECTS_DATA } from '../../constants/resume.data';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-project-carousel',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, TranslatePipe],
   template: `
     <div
       class="carousel-container"
@@ -53,14 +54,14 @@ import { PROJECTS_DATA } from '../../constants/resume.data';
                     
                     <!-- Back of the image (Description) -->
                     <div class="flip-card-back">
-                      <p>{{ project.description }}</p>
+                      <p>{{ project.description | translate}}</p>
                     </div>
 
                   </div>
                 </div>
                 
                 <mat-card-content>
-                  <h3 class="text-accent" style="margin-top: 1rem;">{{ project.title }}</h3>
+                  <h3 class="text-accent" style="margin-top: 1rem;">{{ project.title | translate}}</h3>
                 </mat-card-content>
                 
                 <mat-card-actions class="card-actions">

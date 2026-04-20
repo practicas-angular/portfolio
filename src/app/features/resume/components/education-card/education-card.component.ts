@@ -2,11 +2,12 @@ import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { Education } from '../../models/education.interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-education-card',
   standalone: true,
-  imports: [MatCardModule, MatIcon],
+  imports: [MatCardModule, MatIcon, TranslatePipe],
   template: `
     <mat-card class="card-surface education-card">
       <mat-card-header>
@@ -18,11 +19,9 @@ import { Education } from '../../models/education.interface';
             >account_balance</mat-icon
           >
         </div>
-        <mat-card-title class="text-primary" style="margin-bottom: 4px;">{{
-          educationData().degree
-        }}</mat-card-title>
+        <mat-card-title class="text-primary" style="margin-bottom: 4px;">{{ educationData().degree | translate }}</mat-card-title>
         <mat-card-subtitle class="text-accent">{{
-          educationData().institution
+          educationData().institution | translate
         }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content style="margin-left: 2rem;">
@@ -32,7 +31,7 @@ import { Education } from '../../models/education.interface';
             style="vertical-align: middle; font-size: 16px;"
             >location_on</mat-icon
           >
-          {{ educationData().location }}
+          {{ educationData().location | translate}}
         </p>
         <p class="text-muted" style="margin: 0;">
           <mat-icon
@@ -40,7 +39,7 @@ import { Education } from '../../models/education.interface';
             style="vertical-align: middle; font-size: 16px;"
             >calendar_today</mat-icon
           >
-          {{ educationData().period }}
+          {{ educationData().period | translate}}
         </p>
       </mat-card-content>
     </mat-card>

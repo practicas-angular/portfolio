@@ -25,6 +25,7 @@ import {
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MatButtonModule } from '@angular/material/button';
 import { EducationCardComponent } from "../../components/education-card/education-card.component";
+import { TranslatePipe } from '@ngx-translate/core';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,11 +41,11 @@ gsap.registerPlugin(ScrollTrigger);
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-    EducationCardComponent
+    EducationCardComponent,
+    TranslatePipe
 ],
   template: `
     <div class="resume-page-wrapper" style="position: relative;">
-      <!-- Controles flotantes (Se ocultarán en móviles) -->
       <div class="clutch-controls-track">
         <div
           class="clutch-controls gsap-reveal"
@@ -54,7 +55,7 @@ gsap.registerPlugin(ScrollTrigger);
             class="text-muted"
             style="margin-bottom: 4px; font-size: 12px; font-weight: bold;"
           >
-            MECANISMO
+            {{"RESUME_PAGE.MECHANISM.TITLE" | translate}}
           </p>
           <div style="display: flex; gap: 8px;">
             <button
@@ -62,14 +63,14 @@ gsap.registerPlugin(ScrollTrigger);
               (click)="toggleClutch(true)"
               [disabled]="isCoupled()"
             >
-              <mat-icon>link</mat-icon> Engranar
+              <mat-icon>link</mat-icon> {{"RESUME_PAGE.MECHANISM.COUPLE" | translate}}
             </button>
             <button
               mat-raised-button
               (click)="toggleClutch(false)"
               [disabled]="!isCoupled()"
             >
-              <mat-icon>link_off</mat-icon> Desengranar
+              <mat-icon>link_off</mat-icon> {{"RESUME_PAGE.MECHANISM.UNCOUPLE" | translate}}
             </button>
           </div>
         </div>
@@ -121,26 +122,23 @@ gsap.registerPlugin(ScrollTrigger);
               <mat-icon inline="true" style="font-size: 10px;"
                 >location_on</mat-icon
               >
-              Mérida (España)
+              Mérida ({{"RESUME_PAGE.SPAIN" | translate}})
             </span>
           </div>
           <h2 class="text-accent">
-            Desarrollador de Software | Ingeniero Mecánico I+D
+            {{"RESUME_PAGE.TITLE" | translate}}
           </h2>
 
           <p>
-            Profesional con mentalidad analítica y experiencia internacional en
-            Europa. Transicionando de la ingeniería de I+D hacia el desarrollo
-            de software, aportando habilidades en resolución de problemas,
-            gestión de proyectos y aprendizaje rápido de nuevas tecnologías.
+            {{"RESUME_PAGE.SUBTITLE" | translate}}
           </p>
         </section>
 
         <!-- Tecnologías y Lenguajes (Foco Principal) -->
         <section class="skills-section gsap-reveal">
-          <h3>Stack Tecnológico</h3>
+          <h3>{{"RESUME_PAGE.TECH_STACK.TITLE" | translate}}</h3>
 
-          <h4 class="text-muted">Avanzado</h4>
+          <h4 class="text-muted">{{"RESUME_PAGE.TECH_STACK.ADVANCE" | translate}}</h4>
           <mat-chip-set>
             <mat-chip>Java</mat-chip>
             <mat-chip>JavaScript</mat-chip>
@@ -149,7 +147,7 @@ gsap.registerPlugin(ScrollTrigger);
           </mat-chip-set>
 
           <h4 class="text-muted" style="margin-top: 1rem;">
-            Intermedio / En Desarrollo
+            {{"RESUME_PAGE.TECH_STACK.INTERMEDIATE" | translate}}
           </h4>
           <mat-chip-set>
             <mat-chip>React</mat-chip>
@@ -159,12 +157,11 @@ gsap.registerPlugin(ScrollTrigger);
           </mat-chip-set>
 
           <h4 class="text-muted" style="margin-top: 1rem;">
-            Análisis de Datos
+            {{"RESUME_PAGE.TECH_STACK.DATA_ANALYSIS" | translate}}
           </h4>
           <mat-chip-set>
             <mat-chip>PowerBI</mat-chip>
             <mat-chip>Excel</mat-chip>
-            <mat-chip>Análisis Estadístico</mat-chip>
           </mat-chip-set>
         </section>
 
@@ -174,10 +171,10 @@ gsap.registerPlugin(ScrollTrigger);
         >
           <div class="section-header" style="margin-bottom: var(--spacing-6);">
             <h2>
-              <mat-icon color="accent">code</mat-icon> Proyectos Destacados
+              <mat-icon color="accent">code</mat-icon> {{"RESUME_PAGE.PROJECTS.TITLE" | translate}}
             </h2>
             <p class="text-muted">
-              Explora mis aplicaciones y arquitecturas más recientes.
+              {{"RESUME_PAGE.PROJECTS.SUBTITLE" | translate}}
             </p>
           </div>
 
@@ -195,8 +192,7 @@ gsap.registerPlugin(ScrollTrigger);
             (click)="toggleExperience()"
           >
             <h2>
-              <mat-icon color="accent">work</mat-icon> Experiencia en I+D,
-              soporte técnico y gestión de proyectos
+              <mat-icon color="accent">work</mat-icon> {{"RESUME_PAGE.EXPERIENCE.TITLE" | translate}}
             </h2>
             <!-- El icono cambia de flecha hacia abajo a flecha hacia arriba -->
             <mat-icon class="toggle-icon">{{
@@ -228,8 +224,7 @@ gsap.registerPlugin(ScrollTrigger);
             (click)="toggleEducation()"
           >
             <h2>
-              <mat-icon color="accent">school</mat-icon> Educación en ingeniería
-              mecánica y automatización industrial
+              <mat-icon color="accent">school</mat-icon> {{"RESUME_PAGE.EDUCATION.TITLE" | translate}}
             </h2>
             <mat-icon class="toggle-icon">{{
               showEducation() ? 'expand_less' : 'expand_more'

@@ -21,6 +21,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { PusherService } from '../../services/pusher.service';
 import { ActiveUsersService } from '../../services/active-users.service';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -31,6 +32,7 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     FormsModule,
+    TranslatePipe,
   ],
   template: `
     <div class="dashboard-wrapper container">
@@ -38,10 +40,9 @@ import { Router } from '@angular/router';
         class="gsap-reveal"
         style="margin-bottom: var(--spacing-8); margin-top: var(--spacing-6);"
       >
-        <h1>Panel de Datos en Tiempo Real</h1>
+        <h1>{{ 'DASHBOARD_PAGE.TITLE' | translate }}</h1>
         <p class="text-muted">
-          Demostración de flujos de datos continuos utilizando Server-Sent
-          Events (SSE) y programación reactiva (RxJS).
+          {{ 'DASHBOARD_PAGE.SUBTITLE' | translate }}
         </p>
       </header>
 
@@ -54,7 +55,7 @@ import { Router } from '@angular/router';
             <mat-icon color="primary">people</mat-icon>
             <div class="stat-text">
               <h3>{{ activeUsersService.totalUsers() }}</h3>
-              <p class="text-muted">Total Conectados</p>
+              <p class="text-muted">{{ 'DASHBOARD_PAGE.STATS.TOTAL' | translate }}</p>
             </div>
           </div>
         </mat-card>
@@ -64,7 +65,7 @@ import { Router } from '@angular/router';
             <mat-icon color="accent">admin_panel_settings</mat-icon>
             <div class="stat-text">
               <h3>{{ activeUsersService.activeAdmins() }}</h3>
-              <p class="text-muted">Administradores</p>
+              <p class="text-muted">{{ 'DASHBOARD_PAGE.STATS.ADMINS' | translate }}</p>
             </div>
           </div>
         </mat-card>
@@ -74,7 +75,7 @@ import { Router } from '@angular/router';
             <mat-icon color="primary">person</mat-icon>
             <div class="stat-text">
               <h3>{{ activeUsersService.activeUsers() }}</h3>
-              <p class="text-muted">Usuarios Registrados</p>
+              <p class="text-muted">{{ 'DASHBOARD_PAGE.STATS.USERS' | translate }}</p>
             </div>
           </div>
         </mat-card>
@@ -84,7 +85,7 @@ import { Router } from '@angular/router';
             <mat-icon>public</mat-icon>
             <div class="stat-text">
               <h3>{{ activeUsersService.activeGuests() }}</h3>
-              <p class="text-muted">Invitados</p>
+              <p class="text-muted">{{ 'DASHBOARD_PAGE.STATS.GUESTS' | translate }}</p>
             </div>
           </div>
         </mat-card>
@@ -95,10 +96,10 @@ import { Router } from '@angular/router';
         <section class="sse-section">
           <div class="section-header gsap-reveal">
             <h2>
-              <mat-icon color="accent">public</mat-icon> Ediciones en Wikipedia
+              <mat-icon color="accent">public</mat-icon> {{ 'DASHBOARD_PAGE.WIKIPEDIA.TITLE' | translate }}
             </h2>
             <p class="text-muted">
-              Mostrando los últimos 10 cambios globales en vivo.
+              {{ 'DASHBOARD_PAGE.WIKIPEDIA.SUBTITLE' | translate }}
             </p>
           </div>
 
@@ -110,7 +111,7 @@ import { Router } from '@angular/router';
                     edit.title
                   }}</mat-card-title>
                   <mat-card-subtitle
-                    >Editado por:
+                    >{{ 'DASHBOARD_PAGE.WIKIPEDIA.EDITED_BY' | translate }}
                     <strong>{{ edit.user }}</strong></mat-card-subtitle
                   >
                 </mat-card-header>
@@ -120,13 +121,13 @@ import { Router } from '@angular/router';
                     color="primary"
                     [href]="edit.wikiUrl"
                     target="_blank"
-                    >Ver Artículo</a
+                    >{{ 'DASHBOARD_PAGE.WIKIPEDIA.VIEW_ARTICLE' | translate }}</a
                   >
                 </mat-card-actions>
               </mat-card>
             } @empty {
               <p class="text-muted gsap-reveal">
-                Esperando datos en vivo de Wikipedia...
+                {{ 'DASHBOARD_PAGE.WIKIPEDIA.WAITING' | translate }}
               </p>
             }
           </div>
@@ -136,11 +137,10 @@ import { Router } from '@angular/router';
         <section class="websocket-section gsap-reveal">
           <div class="section-header">
             <h2>
-              <mat-icon color="primary">forum</mat-icon> Libro de Visitas
-              (WebSockets)
+              <mat-icon color="primary">forum</mat-icon> {{ 'DASHBOARD_PAGE.GUESTBOOK.TITLE' | translate }}
             </h2>
             <p class="text-muted">
-              Chat en tiempo real mediante Pusher. Logueado como:
+              {{ 'DASHBOARD_PAGE.GUESTBOOK.SUBTITLE' | translate }}
               <strong>{{ auth.currentUser().username }}</strong>
             </p>
           </div>
@@ -157,7 +157,7 @@ import { Router } from '@angular/router';
                   class="text-muted"
                   style="text-align: center; margin-top: 1rem;"
                 >
-                  No hay mensajes. ¡Sé el primero en saludar!
+                  {{ 'DASHBOARD_PAGE.GUESTBOOK.NO_MESSAGES' | translate }}
                 </p>
               }
             </mat-card-content>
@@ -166,7 +166,7 @@ import { Router } from '@angular/router';
               <input
                 type="text"
                 class="chat-input"
-                placeholder="Escribe un mensaje..."
+                [placeholder]="'DASHBOARD_PAGE.GUESTBOOK.PLACEHOLDER' | translate"
                 [(ngModel)]="newMessageInput"
                 (keyup.enter)="sendChatMessage()"
               />
@@ -175,7 +175,7 @@ import { Router } from '@angular/router';
                 (click)="sendChatMessage()"
                 [disabled]="!newMessageInput.trim()"
               >
-                Enviar
+                {{ 'COMMON.SEND' | translate }}
               </button>
             </mat-card-actions>
           </mat-card>

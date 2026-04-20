@@ -12,11 +12,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router'; // Added for routerLink
-import { I18nService, Language } from '../../services/i18n.service';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { SignupDialogComponent } from '../../../features/auth/components/signup-dialog/signup-dialog.component';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { LANGUAGES } from '../../constants/core.data';
 
 @Component({
   selector: 'app-header',
@@ -29,11 +30,12 @@ import { SignupDialogComponent } from '../../../features/auth/components/signup-
     MatMenuModule,
     RouterModule,
     MatDialogModule,
+    TranslateModule
   ],
   template: `
     <mat-toolbar color="primary" class="header-toolbar">
       <span class="portfolio-title"
-        >Gabino Muriel | {{ i18n.translations()?.portfolio || '...' }}</span
+        >Gabino Muriel | {{ "NAVBAR.PORTFOLIO" | translate}}</span
       >
       <span class="spacer"></span>
 
@@ -55,38 +57,38 @@ import { SignupDialogComponent } from '../../../features/auth/components/signup-
         </button>
       </mat-menu>
       <button mat-button class="nav-button" routerLink="/">
-        {{ i18n.translations()?.experience || '...' }}
+        {{ "NAVBAR.EXPERIENCE" | translate}}
       </button>
       @if (isBrowserReady()) {
         @if (auth.currentUser().role !== 'Guest') {
           <button mat-button class="nav-button" routerLink="/dashboard">
-            {{ i18n.translations()?.dashboard || '...' }}
+            {{ "NAVBAR.DASHBOARD" | translate}}
           </button>
         }
       }
 
       <button mat-button class="nav-button" [matMenuTriggerFor]="roleMenu">
         <mat-icon>security</mat-icon>
-        {{ i18n.translations()?.role || '...' }}: {{ auth.currentUser().role }}
+        {{ "NAVBAR.ROLE" | translate}}: {{ auth.currentUser().role }}
       </button>
       <mat-menu #roleMenu="matMenu">
         <button mat-menu-item (click)="loginAs('Gabino (Admin)', 'Admin')">
-          Admin
+          {{ "NAVBAR.ROLES.ADMIN" | translate}}
         </button>
         <button mat-menu-item (click)="loginAs('Reclutador', 'User')">
-          User
+          {{ "NAVBAR.ROLES.USER" | translate}}
         </button>
-        <button mat-menu-item (click)="logout()">Guest (Logout)</button>
+        <button mat-menu-item (click)="logout()">{{ "NAVBAR.ROLES.GUEST" | translate}} ({{ "COMMON.LOGOUT" | translate}})</button>
       </mat-menu>
 
       <button mat-button class="nav-button" [matMenuTriggerFor]="langMenu">
         <mat-icon>language</mat-icon>
-        {{ i18n.currentLang() | uppercase }}
+        {{ "NAVBAR.LANGUAGE" | translate}}
       </button>
       <mat-menu #langMenu="matMenu">
-        <button mat-menu-item (click)="changeLang('es')">Español</button>
-        <button mat-menu-item (click)="changeLang('en')">English</button>
-        <button mat-menu-item (click)="changeLang('pt')">Português</button>
+        <button mat-menu-item (click)="changeLang('es')">{{ "NAVBAR.LANGUAGES.SPANISH" | translate}}</button>
+        <button mat-menu-item (click)="changeLang('en')">{{ "NAVBAR.LANGUAGES.ENGLISH" | translate}}</button>
+        <button mat-menu-item (click)="changeLang('pt')">{{ "NAVBAR.LANGUAGES.PORTUGUESE" | translate}}</button>
       </mat-menu>
 
       <button
@@ -106,11 +108,11 @@ import { SignupDialogComponent } from '../../../features/auth/components/signup-
             [disabled]="auth.isLoading()"
             (click)="simulateSignup()"
           >
-            {{ auth.isLoading() ? 'Cargando...' : 'Crear Cuenta (Mock)' }}
+            {{ auth.isLoading() ? ("COMMON.LOADING" | translate) : ("COMMON.SIGNUP" | translate) }}
           </button>
         } @else {
           <span style="margin-left: 1rem; color: var(--color-accent);">
-            Hola, {{ auth.currentUser().username }}
+            {{ "NAVBAR.WELCOME" | translate}}, {{ auth.currentUser().username }}
           </span>
           <button
             mat-raised-button
@@ -119,7 +121,7 @@ import { SignupDialogComponent } from '../../../features/auth/components/signup-
             style="margin-left: 1rem;"
             (click)="logout()"
           >
-            Salir
+            {{ "COMMON.EXIT" | translate}}
           </button>
         }
       }
@@ -154,13 +156,18 @@ import { SignupDialogComponent } from '../../../features/auth/components/signup-
   ],
 })
 export class HeaderComponent {
-  i18n = inject(I18nService);
   auth = inject(AuthService);
+  private translate = inject(TranslateService);
+  languages = LANGUAGES
   isBrowserReady = signal<boolean>(false);
   isDarkMode = signal<boolean>(false);
   private dialog = inject(MatDialog);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.translate.addLangs(this.languages);
+    this.translate.setDefaultLang('es');
+    this.translate.use('es');
+  }
 
   ngOnInit() {
     // Only set this to true when the browser has taken over
@@ -185,8 +192,8 @@ export class HeaderComponent {
     this.auth.logout();
   }
 
-  changeLang(lang: Language) {
-    this.i18n.setLanguage(lang);
+  changeLang(lang: string) {
+    this.translate.use(lang);
   }
 
   simulateSignup() {

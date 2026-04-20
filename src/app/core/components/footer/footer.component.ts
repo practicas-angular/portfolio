@@ -2,13 +2,13 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { I18nService } from '../../services/i18n.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, TranslateModule],
   template: `
     <footer class="footer-container">
       <div class="container footer-content">
@@ -16,13 +16,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
         <div class="footer-brand">
           <h3>José Gabino Muriel Sánchez</h3>
           <p class="text-muted">
-            Ingeniero Mecánico & Desarrollador Full Stack
+            {{ "FOOTER.SUBTITLE" | translate }}
           </p>
         </div>
 
-        <!-- Social / Contact Links -->
         <div class="footer-socials">
-          <!-- Replace the hrefs with your actual links -->
           <a
             mat-icon-button
             href="https://github.com/jgmuriels01"
@@ -44,14 +42,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
             (click)="
               copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')
             "
-            matTooltip="Copiar Email"
+            matTooltip="'CONTACT.COPY_EMAIL' | translate"
           >
             <mat-icon>email</mat-icon>
           </button>
           <button
             mat-icon-button
             (click)="copyToClipboard('+34 669 264 151', 'Teléfono')"
-            matTooltip="Copiar Teléfono"
+            matTooltip="'CONTACT.COPY_PHONE' | translate"
           >
             <mat-icon>phone</mat-icon>
           </button>
@@ -62,10 +60,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       <div class="footer-bottom">
         <p>
           &copy; {{ currentYear }} Gabino Muriel.
-          {{
-            i18n.translations()?.footer_rights ||
-              'Todos los derechos reservados.'
-          }}
+          {{ "FOOTER.COPYRIGHT" | translate }}
         </p>
       </div>
     </footer>
@@ -142,14 +137,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ],
 })
 export class FooterComponent {
-  i18n = inject(I18nService);
   currentYear = new Date().getFullYear();
 
   snackBar = inject(MatSnackBar);
   copyToClipboard(text: string, type: string) {
     navigator.clipboard.writeText(text).then(() => {
       // Shows a sleek notification for 3 seconds
-      this.snackBar.open(`${type} copiado al portapapeles!`, 'Cerrar', {
+      this.snackBar.open(`${type} copied!`, 'Close', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom',

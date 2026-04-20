@@ -1,25 +1,26 @@
 import { Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Experience } from '../../models/experience.interface';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-experience-card',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, TranslatePipe],
   template: `
     <mat-card class="card-surface">
       <mat-card-header>
         <mat-card-title
-          >{{ experienceData().role }} -
-          {{ experienceData().company }}</mat-card-title
+          >{{ experienceData().role | translate}} -
+          {{ experienceData().company | translate}}</mat-card-title
         >
         <mat-card-subtitle
-          >{{ experienceData().period }} |
-          {{ experienceData().location }}</mat-card-subtitle
+          >{{ experienceData().period | translate}} |
+          {{ experienceData().location | translate}}</mat-card-subtitle
         >
       </mat-card-header>
       <mat-card-content>
-        <p>{{ experienceData().description }}</p>
+        <p>{{ experienceData().description | translate}}</p>
       </mat-card-content>
     </mat-card>
   `,

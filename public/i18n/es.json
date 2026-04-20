@@ -1,7 +1,176 @@
 {
-  "portfolio": "Portfolio",
-  "experience": "Experiencia",
-  "dashboard": "Panel en Vivo",
-  "role": "Rol",
-  "language": "Idioma"
+  "COMMON": {
+    "LOADING": "Cargando...",
+    "ERROR": "Error",
+    "ACCEPT": "Aceptar",
+    "CANCEL": "Cancelar",
+    "EXIT": "Salir",
+    "YES": "Sí",
+    "NO": "No",
+    "OK": "OK",
+    "LOGOUT": "Cerrar Sesión",
+    "LOGIN": "Iniciar Sesión",
+    "SIGNUP": "Registrarse",
+    "ENTER": "Entrar",
+    "SEND": "Enviar"
+  },
+  "AUTH": {
+    "NEW_USER": "Nuevo Usuario",
+    "CHOOSE_USERNAME": "Elige tu nombre de usuario para el chat interactivo:",
+    "USERNAME_LABEL": "Nombre de usuario"
+  },
+  "NAVBAR": {
+    "PORTFOLIO": "Portfolio",
+    "CONTACT": "Contacto",
+    "EXPERIENCE": "Experiencia",
+    "DASHBOARD": "Panel en Vivo",
+    "ROLE": "Rol",
+    "ROLES": {
+      "ADMIN": "Administrador",
+      "USER": "Usuario",
+      "GUEST": "Invitado"
+    },
+    "LANGUAGE": "Idioma",
+    "LANGUAGES": {
+      "SPANISH": "Español",
+      "ENGLISH": "Inglés",
+      "PORTUGUESE": "Portugués"
+    },
+    "CREATE_ACCOUNT_MOCKS": "Crear Cuenta (Mock)",
+    "WELCOME": "Bienvenido"
+  },
+  "FORM": {
+    "PHONE": "Teléfono",
+    "EMAIL": "Correo electrónico"
+  },
+  "CONTACT": {
+    "COPY_PHONE": "Copiar Teléfono",
+    "COPY_EMAIL": "Copiar Correo electrónico"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "Todos los derechos reservados.",
+    "SUBTITLE": "Ingeniero Mecánico & Desarrollador Full Stack"
+  },
+  "RESUME_PAGE": {
+    "SPAIN": "España",
+    "TITLE": "Desarrollador de Software | Ingeniero Mecánico I+D",
+    "SUBTITLE": "Profesional con mentalidad analítica y experiencia internacional en Europa. Transicionando de la ingeniería de I+D hacia el desarrollo de software, aportando habilidades en resolución de problemas, gestión de proyectos y aprendizaje rápido de nuevas tecnologías.",
+    "MECHANISM" : {
+      "TITLE" : "Mecanismo",
+      "COUPLE" : "Engranar",
+      "UNCOUPLE" : "Desengranar"
+    },
+    "TECH_STACK": {
+      "TITLE": "Stack Tecnológico",
+      "ADVANCE": "Avanzado",
+      "INTERMEDIATE": "Intermedio / En Desarrollo",
+      "DATA_ANALYSIS": "Análisis de Datos"
+    },
+    "PROJECTS": {
+      "TITLE": "Proyectos Destacados",
+      "SUBTITLE": "Explora mis aplicaciones y arquitecturas más recientes.",
+      "1": {
+        "TITLE": "Bellochip",
+        "DESCRIPTION": "Tienda online desarrollada con java y mysql."
+      },
+      "2": {
+        "TITLE": "Vesto",
+        "DESCRIPTION": "Proyecto desarrollado junto a 4 compañeros. App web para creación de conjuntos de ropa."
+      },
+      "3": {
+        "TITLE": "IES Albarregas",
+        "DESCRIPTION": "Landing del IES Albarregas utilizando componentes shacdn y un diseño 3D desarrollado en Blender."
+      },
+      "4": {
+        "TITLE": "ExtremaDev",
+        "DESCRIPTION": "Landing de web de programadores extremeños utilizando animaciones GSAP."
+      },
+      "5": {
+        "TITLE": "Tablero Kanban",
+        "DESCRIPTION": "Tablero kanban para gestión de tareas emulando Trello."
+      },
+      "6": {
+        "TITLE": "Aventura en el Reino",
+        "DESCRIPTION": "Mini juego en js con gestión de escenas en single page con mercado interactivo."
+      },
+      "7": {
+        "TITLE": "Panel de usuario",
+        "DESCRIPTION": "Introducción a formularios js con almacenamiento de información en cookies."
+      },
+      "8": {
+        "TITLE": "Búsqueda gasolineras",
+        "DESCRIPTION": "Buscador de gasolineras por provinvia, municipio, tipo de combustible y horas de apertura comprobando fecha actual."
+      },
+      "9": {
+        "TITLE": "Diseño portfolio",
+        "DESCRIPTION": "Guía de estilos y diseño de un portfolio personal."
+      },
+      "10": {
+        "TITLE": "Gestión de fechas",
+        "DESCRIPTION": "Contador de tiempo hasta fecha indicada, remarcando tiempo restante mediante un sistema de colores."
+      }
+    },
+    "EXPERIENCE": {
+      "TITLE": "Experiencia en I+D soporte técnico y gestión de proyectos",
+      "1": {
+        "ROLE": "Ingeniero de Servicio y Soporte Técnico",
+        "COMPANY": "Tembo",
+        "LOCATION": "España y Europa",
+        "PERIOD": "Agosto 2020 - Septiembre 2023",
+        "DESCRIPTION": "Gestión de proyectos y soporte técnico a nivel internacional, resolviendo problemas complejos en tiempo real para clientes en toda Europa. Desarrollé fuertes habilidades de comunicación transversal y adaptación en entornos multiculturales."
+      },
+      "2": {
+        "ROLE": "Ingeniero de Proyectos",
+        "COMPANY": "Suurmond",
+        "LOCATION": "Nunspeet, Países Bajos",
+        "PERIOD": "Febrero 2020 - Julio 2020",
+        "DESCRIPTION": "Gestión de proyectos y diseño técnico. Soporte de ventas y supervisión de fabricación y ensamblaje."
+      },
+      "3": {
+        "ROLE": "Ingeniero de Concepto / I+D",
+        "COMPANY": "Tembo",
+        "LOCATION": "Kampen, Países Bajos",
+        "PERIOD": "Mayo 2017 - Enero 2020",
+        "DESCRIPTION": "Aplicación de análisis de datos y modelado estadístico para optimizar procesos de I+D. Implementación de Diseño de Experimentos (DOE) y Control de Calidad Interno (IQC), demostrando un enfoque altamente analítico y metódico."
+      }
+    },
+    "EDUCATION": {
+      "TITLE": "Educación en ingeniería mecánica y automatización industrial",
+      "1": {
+        "DEGREE": "Mecánica Aplicada y Automatización Industrial y Robótica",
+        "INSTITUTION": "Windesheim, Universidad de ciencias aplicadas",
+        "LOCATION": "Zwolle, Países Bajos",
+        "PERIOD": "Septiembre 2016 - Julio 2017"
+      },
+      "2": {
+        "DEGREE": "Grado en ingeniería mecánica",
+        "INSTITUTION": "Universidad de Salamanca",
+        "LOCATION": "Béjar, España",
+        "PERIOD": "Septiembre 2013 - Julio 2018"
+      }
+    }
+  },
+  "DASHBOARD_PAGE": {
+    "TITLE": "Panel de Datos en Tiempo Real",
+    "SUBTITLE": "Demostración de flujos de datos continuos utilizando Server-Sent Events (SSE) y programación reactiva (RxJS).",
+    "STATS": {
+      "TOTAL": "Total Conectados",
+      "ADMINS": "Administradores",
+      "USERS": "Usuarios Registrados",
+      "GUESTS": "Invitados"
+    },
+    "WIKIPEDIA": {
+      "TITLE": "Ediciones en Wikipedia",
+      "SUBTITLE": "Mostrando los últimos 10 cambios globales en vivo.",
+      "EDITED_BY": "Editado por:",
+      "VIEW_ARTICLE": "Ver Artículo",
+      "WAITING": "Esperando datos en vivo de Wikipedia..."
+    },
+    "GUESTBOOK": {
+      "TITLE": "Libro de Visitas (WebSockets)",
+      "SUBTITLE": "Chat en tiempo real mediante Pusher. Logueado como:",
+      "NO_MESSAGES": "No hay mensajes. ¡Sé el primero en saludar!",
+      "PLACEHOLDER": "Escribe un mensaje..."
+    }
+  }
 }

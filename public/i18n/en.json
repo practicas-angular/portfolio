@@ -1,7 +1,176 @@
 {
-  "portfolio": "Portflio",
-  "experience": "Experience",
-  "dashboard": "Live Dashboard",
-  "role": "Role",
-  "language": "Language"
+  "COMMON": {
+    "LOADING": "Loading...",
+    "ERROR": "Error",
+    "ACCEPT": "Accept",
+    "CANCEL": "Cancel",
+    "EXIT": "Exit",
+    "YES": "Yes",
+    "NO": "No",
+    "OK": "OK",
+    "LOGOUT": "Log Out",
+    "LOGIN": "Log In",
+    "SIGNUP": "Sign Up",
+    "ENTER": "Enter",
+    "SEND": "Send"
+  },
+  "AUTH": {
+    "NEW_USER": "New User",
+    "CHOOSE_USERNAME": "Choose your username for the interactive chat:",
+    "USERNAME_LABEL": "Username"
+  },
+  "NAVBAR": {
+    "PORTFOLIO": "Portfolio",
+    "CONTACT": "Contact",
+    "EXPERIENCE": "Experience",
+    "DASHBOARD": "Live Dashboard",
+    "ROLE": "Role",
+    "ROLES": {
+      "ADMIN": "Administrator",
+      "USER": "User",
+      "GUEST": "Guest"
+    },
+    "LANGUAGE": "Language",
+    "LANGUAGES": {
+      "SPANISH": "Spanish",
+      "ENGLISH": "English",
+      "PORTUGUESE": "Portuguese"
+    },
+    "CREATE_ACCOUNT_MOCKS": "Create Account (Mock)",
+    "WELCOME": "Welcome"
+  },
+  "FORM": {
+    "PHONE": "Phone",
+    "EMAIL": "Email"
+  },
+  "CONTACT": {
+    "COPY_PHONE": "Copy Phone",
+    "COPY_EMAIL": "Copy Email"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "All rights reserved.",
+    "SUBTITLE": "Mechanical Engineer & Full Stack Developer"
+  },
+  "RESUME_PAGE": {
+    "SPAIN": "Spain",
+    "TITLE": "Software Developer | R&D Mechanical Engineer",
+    "SUBTITLE": "Professional with an analytical mindset and international experience in Europe. Transitioning from R&D engineering to software development, bringing skills in problem-solving, project management, and rapid learning of new technologies.",
+    "MECHANISM": {
+      "TITLE": "Mechanism",
+      "COUPLE": "Engage",
+      "UNCOUPLE": "Disengage"
+    },
+    "TECH_STACK": {
+      "TITLE": "Tech Stack",
+      "ADVANCE": "Advanced",
+      "INTERMEDIATE": "Intermediate / Developing",
+      "DATA_ANALYSIS": "Data Analysis"
+    },
+    "PROJECTS": {
+      "TITLE": "Featured Projects",
+      "SUBTITLE": "Explore my latest applications and architectures.",
+      "1": {
+        "TITLE": "Bellochip",
+        "DESCRIPTION": "Online store developed with Java and MySQL."
+      },
+      "2": {
+        "TITLE": "Vesto",
+        "DESCRIPTION": "Project developed alongside 4 peers. Web app for outfit creation."
+      },
+      "3": {
+        "TITLE": "IES Albarregas",
+        "DESCRIPTION": "IES Albarregas landing page using shadcn components and a 3D design developed in Blender."
+      },
+      "4": {
+        "TITLE": "ExtremaDev",
+        "DESCRIPTION": "Landing page for Extremadura programmers using GSAP animations."
+      },
+      "5": {
+        "TITLE": "Kanban Board",
+        "DESCRIPTION": "Kanban board for task management simulating Trello."
+      },
+      "6": {
+        "TITLE": "Kingdom Adventure",
+        "DESCRIPTION": "JS mini-game with single-page scene management and interactive market."
+      },
+      "7": {
+        "TITLE": "User Panel",
+        "DESCRIPTION": "Introduction to JS forms with information storage in cookies."
+      },
+      "8": {
+        "TITLE": "Gas Station Search",
+        "DESCRIPTION": "Gas station search engine by province, municipality, fuel type, and opening hours checking the current date."
+      },
+      "9": {
+        "TITLE": "Portfolio Design",
+        "DESCRIPTION": "Style guide and design of a personal portfolio."
+      },
+      "10": {
+        "TITLE": "Date Management",
+        "DESCRIPTION": "Countdown timer to a specified date, highlighting the remaining time through a color system."
+      }
+    },
+    "EXPERIENCE": {
+      "TITLE": "Experience in R&D, technical support, and project management",
+      "1": {
+        "ROLE": "Service and Technical Support Engineer",
+        "COMPANY": "Tembo",
+        "LOCATION": "Spain and Europe",
+        "PERIOD": "August 2020 - September 2023",
+        "DESCRIPTION": "International project management and technical support, solving complex problems in real-time for clients across Europe. Developed strong cross-functional communication and adaptation skills in multicultural environments."
+      },
+      "2": {
+        "ROLE": "Project Engineer",
+        "COMPANY": "Suurmond",
+        "LOCATION": "Nunspeet, Netherlands",
+        "PERIOD": "February 2020 - July 2020",
+        "DESCRIPTION": "Project management and technical design. Sales support and supervision of manufacturing and assembly."
+      },
+      "3": {
+        "ROLE": "Concept / R&D Engineer",
+        "COMPANY": "Tembo",
+        "LOCATION": "Kampen, Netherlands",
+        "PERIOD": "May 2017 - January 2020",
+        "DESCRIPTION": "Application of data analysis and statistical modeling to optimize R&D processes. Implementation of Design of Experiments (DOE) and Internal Quality Control (IQC), demonstrating a highly analytical and methodical approach."
+      }
+    },
+    "EDUCATION": {
+      "TITLE": "Education in mechanical engineering and industrial automation",
+      "1": {
+        "DEGREE": "Applied Mechanics and Industrial Automation and Robotics",
+        "INSTITUTION": "Windesheim, University of Applied Sciences",
+        "LOCATION": "Zwolle, Netherlands",
+        "PERIOD": "September 2016 - July 2017"
+      },
+      "2": {
+        "DEGREE": "Bachelor's Degree in Mechanical Engineering",
+        "INSTITUTION": "University of Salamanca",
+        "LOCATION": "Béjar, Spain",
+        "PERIOD": "September 2013 - July 2018"
+      }
+    }
+  },
+  "DASHBOARD_PAGE": {
+    "TITLE": "Real-Time Data Dashboard",
+    "SUBTITLE": "Demonstration of continuous data streams using Server-Sent Events (SSE) and reactive programming (RxJS).",
+    "STATS": {
+      "TOTAL": "Total Connected",
+      "ADMINS": "Administrators",
+      "USERS": "Registered Users",
+      "GUESTS": "Guests"
+    },
+    "WIKIPEDIA": {
+      "TITLE": "Wikipedia Edits",
+      "SUBTITLE": "Showing the last 10 global changes live.",
+      "EDITED_BY": "Edited by:",
+      "VIEW_ARTICLE": "View Article",
+      "WAITING": "Waiting for live data from Wikipedia..."
+    },
+    "GUESTBOOK": {
+      "TITLE": "Guestbook (WebSockets)",
+      "SUBTITLE": "Real-time chat via Pusher. Logged in as:",
+      "NO_MESSAGES": "No messages. Be the first to say hi!",
+      "PLACEHOLDER": "Type a message..."
+    }
+  }
 }

@@ -20,12 +20,11 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([mockBackendInterceptor])),
     provideTranslateService({
-      defaultLanguage: 'es',
+      fallbackLang: 'es',
 
-      // 2. EL CARGADOR: Aquí se define dónde están los JSON
       loader: provideTranslateHttpLoader({
-        prefix: '/assets/i18n/', // Ruta a la carpeta
-        suffix: '.json', // Extensión del archivo
+        prefix: '/i18n/',
+        suffix: '.json',
       }),
     }),
   ],
