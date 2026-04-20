@@ -106,7 +106,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
             {{ auth.isLoading() ? 'Cargando...' : 'Crear Cuenta (Mock)' }}
           </button>
         } @else {
-          <span style="margin-left: 1rem; color: var(--color-text-inverse);">
+          <span style="margin-left: 1rem; color: var(--color-accent);">
             Hola, {{ auth.currentUser().username }}
           </span>
           <button

@@ -16,8 +16,12 @@ import { FooterComponent } from "./core/components/footer/footer.component";
     <app-footer></app-footer>
   `,
   styles: [`
+  app-header{
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+  }
     main {
-      /* Pushes content down slightly from the header using your custom variables */
       padding-top: var(--spacing-8); 
       min-height: 100vh;
     }

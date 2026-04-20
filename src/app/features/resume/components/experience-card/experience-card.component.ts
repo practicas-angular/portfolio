@@ -33,10 +33,12 @@ import { Experience } from '../../models/experience.interface';
         color: var(--color-primary);
         font-weight: var(--weight-bold);
       }
+      mat-card-content {
+        margin-top: var(--spacing-4);
+      }
     `,
   ],
 })
 export class ExperienceCardComponent {
-  // Advanced Angular: Using required Signal inputs
   experienceData = input.required<Experience>();
 }

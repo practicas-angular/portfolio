@@ -33,8 +33,7 @@ body[data-theme="dark"] {
 
   /* Typography */
   --font-primary: "Inter", "Roboto", "Helvetica Neue", sans-serif;
-  --font-secondary:
-    "Space Grotesk", "Montserrat", sans-serif;
+  --font-secondary: "Space Grotesk", "Montserrat", sans-serif;
   /* Good for technical headings */
 
   /* Font Sizes (Fluid Typography Scale) */
@@ -194,4 +193,35 @@ a {
   &:hover {
     box-shadow: var(--shadow-lg);
   }
+}
+
+/* ==========================================================================
+   Global Angular Material Dark Mode Overrides
+   ========================================================================== */
+
+/* 1. Force all Material Cards to use your dynamic background variable */
+.card-surface,
+.mat-mdc-card {
+  --mdc-elevated-card-container-color: var(--color-bg-surface);
+
+  /* Add a subtle border in dark mode to separate cards from the background */
+  border: 1px solid var(--color-primary-light);
+}
+
+/* 2. Standardize all Card Typography to follow your :root variables */
+.mat-mdc-card-title {
+  /* Forces titles to use your Deep Slate / Light text variable */
+  color: var(--color-accent) !important;
+  font-family: var(--font-secondary) !important;
+}
+
+.mat-mdc-card-subtitle {
+  /* Forces subtitles to use your muted gray variable */
+  color: var(--color-text-muted) !important;
+}
+
+.mat-mdc-card-content p,
+.mat-mdc-card-content {
+  /* Forces standard text to use your main text variable */
+  color: var(--color-text-main) !important;
 }

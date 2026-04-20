@@ -170,7 +170,6 @@ import { ActiveUsersService } from '../../services/active-users.service';
               />
               <button
                 mat-raised-button
-                color="accent"
                 (click)="sendChatMessage()"
                 [disabled]="!newMessageInput.trim()"
               >
@@ -291,6 +290,14 @@ import { ActiveUsersService } from '../../services/active-users.service';
           grid-template-columns: 1fr 1fr;
         }
       }
+
+      .mat-mdc-raised-button[disabled] {
+          --mdc-protected-button-disabled-label-text-color: var(
+            --color-text-muted
+          );
+
+          opacity: 0.7;
+        }
     `,
   ],
 })

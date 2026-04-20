@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { I18nService } from '../../services/i18n.service';
-import { MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-footer',
@@ -41,7 +41,9 @@ import { MatSnackBar} from '@angular/material/snack-bar';
           </a>
           <button
             mat-icon-button
-            (click)="copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')"
+            (click)="
+              copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')
+            "
             matTooltip="Copiar Email"
           >
             <mat-icon>email</mat-icon>
@@ -110,18 +112,19 @@ import { MatSnackBar} from '@angular/material/snack-bar';
       }
 
       .footer-socials {
-        display: flex;
-        gap: var(--spacing-2);
+        gap: var(--spacing-4);
       }
 
-      .footer-socials a, .footer-socials button {
+      .footer-socials a,
+      .footer-socials button {
         color: var(--color-text-inverse);
         transition:
           color var(--transition-fast),
           transform var(--transition-fast);
       }
 
-      .footer-socials a:hover, .footer-socials button:hover {
+      .footer-socials a:hover,
+      .footer-socials button:hover {
         color: var(--color-accent);
         transform: translateY(-3px); /* Small GSAP-like hover bounce */
       }

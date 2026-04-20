@@ -24,6 +24,7 @@ import {
 } from '@angular/material/card';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MatButtonModule } from '@angular/material/button';
+import { EducationCardComponent } from "../../components/education-card/education-card.component";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,15 +37,11 @@ gsap.registerPlugin(ScrollTrigger);
     MatChipsModule,
     ProjectCarouselComponent,
     MatIcon,
-    MatCardContent,
-    MatCardSubtitle,
-    MatCardTitle,
-    MatCardHeader,
-    MatCard,
     MatCardModule,
     MatIconModule,
     MatButtonModule,
-  ],
+    EducationCardComponent
+],
   template: `
     <div class="resume-page-wrapper" style="position: relative;">
       <!-- Controles flotantes (Se ocultarán en móviles) -->
@@ -62,7 +59,6 @@ gsap.registerPlugin(ScrollTrigger);
           <div style="display: flex; gap: 8px;">
             <button
               mat-raised-button
-              color="primary"
               (click)="toggleClutch(true)"
               [disabled]="isCoupled()"
             >
@@ -70,7 +66,6 @@ gsap.registerPlugin(ScrollTrigger);
             </button>
             <button
               mat-raised-button
-              color="warn"
               (click)="toggleClutch(false)"
               [disabled]="!isCoupled()"
             >
@@ -147,10 +142,10 @@ gsap.registerPlugin(ScrollTrigger);
 
           <h4 class="text-muted">Avanzado</h4>
           <mat-chip-set>
-            <mat-chip class="chip-primary">Java</mat-chip>
-            <mat-chip class="chip-primary">JavaScript</mat-chip>
-            <mat-chip class="chip-primary">MySQL</mat-chip>
-            <mat-chip class="chip-primary">Bootstrap</mat-chip>
+            <mat-chip>Java</mat-chip>
+            <mat-chip>JavaScript</mat-chip>
+            <mat-chip>MySQL</mat-chip>
+            <mat-chip>Bootstrap</mat-chip>
           </mat-chip-set>
 
           <h4 class="text-muted" style="margin-top: 1rem;">
@@ -159,7 +154,7 @@ gsap.registerPlugin(ScrollTrigger);
           <mat-chip-set>
             <mat-chip>React</mat-chip>
             <mat-chip>Python</mat-chip>
-            <mat-chip color="accent">Angular</mat-chip>
+            <mat-chip>Angular</mat-chip>
             <mat-chip>Tailwind CSS</mat-chip>
           </mat-chip-set>
 
@@ -241,51 +236,10 @@ gsap.registerPlugin(ScrollTrigger);
             }}</mat-icon>
           </div>
 
-          <!-- El contenido solo se renderiza si showEducation() es true -->
           @if (showEducation()) {
             <div class="education-grid fade-in-dropdown">
-              <!-- Tu iteración de tarjetas de educación -->
-              @for (edu of educationList; track edu.degree) {
-                <mat-card class="card-surface education-card">
-                  <mat-card-header>
-                    <div mat-card-avatar>
-                      <mat-icon
-                        class="education-icon"
-                        color="primary"
-                        style="transform: scale(1.5); margin-top: 8px;"
-                        >account_balance</mat-icon
-                      >
-                    </div>
-                    <mat-card-title
-                      class="text-primary"
-                      style="margin-bottom: 4px;"
-                      >{{ edu.degree }}</mat-card-title
-                    >
-                    <mat-card-subtitle class="text-accent">{{
-                      edu.institution
-                    }}</mat-card-subtitle>
-                  </mat-card-header>
-                  <mat-card-content
-                    style="margin-top: 1rem; margin-left: 2rem;"
-                  >
-                    <p class="text-muted" style="margin: 0;">
-                      <mat-icon
-                        inline="true"
-                        style="vertical-align: middle; font-size: 16px;"
-                        >location_on</mat-icon
-                      >
-                      {{ edu.location }}
-                    </p>
-                    <p class="text-muted" style="margin: 0;">
-                      <mat-icon
-                        inline="true"
-                        style="vertical-align: middle; font-size: 16px;"
-                        >calendar_today</mat-icon
-                      >
-                      {{ edu.period }}
-                    </p>
-                  </mat-card-content>
-                </mat-card>
+              @for (e of educationList; track e.degree) {
+                <app-education-card [educationData]="e"></app-education-card>
               }
             </div>
           }
@@ -311,6 +265,7 @@ gsap.registerPlugin(ScrollTrigger);
       .experience-section {
         margin-top: var(--spacing-16);
       }
+
       .section-header h2 {
         display: flex;
         align-items: center;
@@ -318,6 +273,17 @@ gsap.registerPlugin(ScrollTrigger);
       }
       mat-chip {
         font-family: var(--font-secondary);
+      }
+
+      .skills-section mat-chip {
+        --mdc-chip-label-text-color: var(--color-text-muted);
+        --mdc-chip-elevated-container-color: var(--color-bg-surface);
+      }
+
+      .skills-section mat-chip:hover {
+        --mdc-chip-elevated-container-color: var(--color-bg-surface);
+        --mdc-chip-label-text-color: var( --color-primary);
+        border-color: var(--color-accent);
       }
 
       .education-grid {
@@ -374,6 +340,14 @@ gsap.registerPlugin(ScrollTrigger);
           border-radius: var(--border-radius-md);
           box-shadow: var(--shadow-lg);
           border-left: 4px solid var(--color-accent);
+        }
+
+        .clutch-controls .mat-mdc-raised-button[disabled] {
+          --mdc-protected-button-disabled-label-text-color: var(
+            --color-text-muted
+          );
+
+          opacity: 0.7;
         }
 
         .mechanical-system {
@@ -496,7 +470,7 @@ export class ResumePageComponent implements AfterViewInit {
   showExperience = signal(false);
   showEducation = signal(false);
 
-  isCoupled = signal(false);
+  isCoupled = signal(true);
   private currentRotation = 0;
   private previousScrollY = 0;
 
