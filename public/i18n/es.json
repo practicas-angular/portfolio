@@ -36,7 +36,7 @@
       "ENGLISH": "Inglés",
       "PORTUGUESE": "Portugués"
     },
-    "SWITCH_THEME" : "Cambiar tema",
+    "SWITCH_THEME": "Cambiar tema",
     "CREATE_ACCOUNT_MOCKS": "Crear Cuenta (Mock)",
     "WELCOME": "Bienvenido"
   },
@@ -56,10 +56,10 @@
     "SPAIN": "España",
     "TITLE": "Desarrollador de Software | Ingeniero Mecánico I+D",
     "SUBTITLE": "Profesional con mentalidad analítica y experiencia internacional en Europa. Transicionando de la ingeniería de I+D hacia el desarrollo de software, aportando habilidades en resolución de problemas, gestión de proyectos y aprendizaje rápido de nuevas tecnologías.",
-    "MECHANISM" : {
-      "TITLE" : "Mecanismo",
-      "COUPLE" : "Engranar",
-      "UNCOUPLE" : "Desengranar"
+    "MECHANISM": {
+      "TITLE": "Mecanismo",
+      "COUPLE": "Engranar",
+      "UNCOUPLE": "Desengranar"
     },
     "TECH_STACK": {
       "TITLE": "Stack Tecnológico",
@@ -112,27 +112,27 @@
       }
     },
     "EXPERIENCE": {
-      "TITLE": "Experiencia en I+D soporte técnico y gestión de proyectos",
+      "TITLE": "Experiencia en I+D, soporte técnico y gestión de proyectos",
       "1": {
         "ROLE": "Ingeniero de Servicio y Soporte Técnico",
         "COMPANY": "Tembo",
         "LOCATION": "España y Europa",
         "PERIOD": "Agosto 2020 - Septiembre 2023",
-        "DESCRIPTION": "Gestión de proyectos y soporte técnico a nivel internacional, resolviendo problemas complejos en tiempo real para clientes en toda Europa. Desarrollé fuertes habilidades de comunicación transversal y adaptación en entornos multiculturales."
+        "DESCRIPTION": "Gestión de proyectos y soporte técnico para clientes internacionales. Resolución de incidencias técnicas en planta y coordinación directa con el cliente para asegurar el cumplimiento de los objetivos del proyecto."
       },
       "2": {
         "ROLE": "Ingeniero de Proyectos",
         "COMPANY": "Suurmond",
         "LOCATION": "Nunspeet, Países Bajos",
         "PERIOD": "Febrero 2020 - Julio 2020",
-        "DESCRIPTION": "Gestión de proyectos y diseño técnico. Soporte de ventas y supervisión de fabricación y ensamblaje."
+        "DESCRIPTION": "Responsable del ciclo de vida del producto: desde el diseño conceptual y soporte técnico en ventas hasta la supervisión de fabricación y montaje final."
       },
       "3": {
         "ROLE": "Ingeniero de Concepto / I+D",
         "COMPANY": "Tembo",
         "LOCATION": "Kampen, Países Bajos",
         "PERIOD": "Mayo 2017 - Enero 2020",
-        "DESCRIPTION": "Aplicación de análisis de datos y modelado estadístico para optimizar procesos de I+D. Implementación de Diseño de Experimentos (DOE) y Control de Calidad Interno (IQC), demostrando un enfoque altamente analítico y metódico."
+        "DESCRIPTION": "Optimización de procesos mediante análisis de datos y modelado estadístico (DOE). Implementación de controles de calidad internos para validar el desarrollo de nuevos conceptos."
       }
     },
     "EDUCATION": {

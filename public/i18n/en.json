@@ -118,21 +118,21 @@
         "COMPANY": "Tembo",
         "LOCATION": "Spain and Europe",
         "PERIOD": "August 2020 - September 2023",
-        "DESCRIPTION": "International project management and technical support, solving complex problems in real-time for clients across Europe. Developed strong cross-functional communication and adaptation skills in multicultural environments."
+        "DESCRIPTION": "Project management and technical support for international clients. On-site technical troubleshooting and direct coordination with customers to ensure project objectives are met."
       },
       "2": {
         "ROLE": "Project Engineer",
         "COMPANY": "Suurmond",
         "LOCATION": "Nunspeet, Netherlands",
         "PERIOD": "February 2020 - July 2020",
-        "DESCRIPTION": "Project management and technical design. Sales support and supervision of manufacturing and assembly."
+        "DESCRIPTION": "Responsibility for the product lifecycle: from conceptual design and technical sales support to the supervision of manufacturing and final assembly."
       },
       "3": {
         "ROLE": "Concept / R&D Engineer",
         "COMPANY": "Tembo",
         "LOCATION": "Kampen, Netherlands",
         "PERIOD": "May 2017 - January 2020",
-        "DESCRIPTION": "Application of data analysis and statistical modeling to optimize R&D processes. Implementation of Design of Experiments (DOE) and Internal Quality Control (IQC), demonstrating a highly analytical and methodical approach."
+        "DESCRIPTION": "Process optimization using data analysis and statistical modeling (DOE). Implementation of internal quality controls to validate the development of new concepts."
       }
     },
     "EDUCATION": {

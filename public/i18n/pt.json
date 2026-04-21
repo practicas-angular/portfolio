@@ -118,21 +118,21 @@
         "COMPANY": "Tembo",
         "LOCATION": "Espanha e Europa",
         "PERIOD": "Agosto 2020 - Setembro 2023",
-        "DESCRIPTION": "Gestão de projetos e suporte técnico a nível internacional, resolvendo problemas complexos em tempo real para clientes em toda a Europa. Desenvolvi fortes habilidades de comunicação transversal e adaptação em ambientes multiculturais."
+        "DESCRIPTION": "Gestão de projetos e suporte técnico para clientes internacionais. Resolução de incidentes técnicos em planta e coordenação direta com o cliente para garantir o cumprimento dos objetivos do projeto."
       },
       "2": {
         "ROLE": "Engenheiro de Projetos",
         "COMPANY": "Suurmond",
         "LOCATION": "Nunspeet, Países Baixos",
         "PERIOD": "Fevereiro 2020 - Julho 2020",
-        "DESCRIPTION": "Gestão de projetos e design técnico. Suporte de vendas e supervisão de fabricação e montagem."
+        "DESCRIPTION": "Responsável pelo ciclo de vida do produto: desde o design conceitual e suporte técnico em vendas até a supervisão da fabricação e montagem final."
       },
       "3": {
         "ROLE": "Engenheiro de Conceito / P&D",
         "COMPANY": "Tembo",
         "LOCATION": "Kampen, Países Baixos",
         "PERIOD": "Maio 2017 - Janeiro 2020",
-        "DESCRIPTION": "Aplicação de análise de dados e modelagem estatística para otimizar processos de P&D. Implementação de Design de Experimentos (DOE) e Controle de Qualidade Interno (IQC), demonstrando uma abordagem altamente analítica e metódica."
+        "DESCRIPTION": "Otimização de processos através de análise de dados e modelagem estatística (DOE). Implementação de controles de qualidade internos para validar o desenvolvimento de novos conceitos."
       }
     },
     "EDUCATION": {
