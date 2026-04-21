@@ -34,7 +34,7 @@ import { LANGUAGES } from '../../constants/core.data';
   ],
   template: `
     <mat-toolbar color="primary" class="header-toolbar">
-      <span class="portfolio-title nav-button" (click)="navHome()" routerLink="/" style="font-weight: 500; cursor: pointer;" fragment="start">
+      <span class="portfolio-title nav-button" (click)="navHome()" routerLink="/" style="font-weight: 600; cursor: pointer;" fragment="start">
         Gabino Muriel | {{ 'NAVBAR.PORTFOLIO' | translate }}</span
       >
       <span class="spacer"></span>
@@ -416,10 +416,8 @@ export class HeaderComponent {
   }
 
   navHome() {
-  // 1. Navigate to root
   this.router.navigate(['/']);
   
-  // 2. Smooth scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 }

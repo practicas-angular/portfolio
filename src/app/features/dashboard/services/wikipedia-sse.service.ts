@@ -28,7 +28,6 @@ export class WikipediaSseService {
         this.zone.run(() => {
           const data = JSON.parse(event.data);
           
-          // Only process actual edits
           if (data.type === 'edit') {
             const edit: WikipediaEdit = {
               id: data.meta.id,
@@ -39,8 +38,6 @@ export class WikipediaSseService {
               timestamp: data.meta.dt
             };
             
-            // 3. We still push all edits into the Subject, but the throttleTime 
-            // operator above ensures the component only receives them every 2 seconds
             this.editsSubject.next(edit);
           }
         });

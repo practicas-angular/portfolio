@@ -481,7 +481,9 @@ export class ResumePageComponent implements AfterViewInit {
   private currentRotation = 0;
   private previousScrollY = 0;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    
+  }
 
   toggleExperience() {
     this.showExperience.update((val) => !val);
@@ -505,6 +507,7 @@ export class ResumePageComponent implements AfterViewInit {
     this.isCoupled.set(state);
 
     if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('gearCoupled', String(state));
       this.checkViewportAndScroll();
     }
   }
@@ -525,6 +528,10 @@ export class ResumePageComponent implements AfterViewInit {
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      const savedGearState = sessionStorage.getItem('gearCoupled');
+      if (savedGearState !== null) {
+        this.isCoupled.set(savedGearState === 'true');
+      }
       this.checkViewportAndScroll();
     }
   }
