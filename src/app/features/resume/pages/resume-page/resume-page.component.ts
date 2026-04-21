@@ -431,6 +431,8 @@ gsap.registerPlugin(ScrollTrigger);
         border-bottom: 2px solid transparent;
         transition: border-color var(--transition-fast);
         user-select: none; /* Evita que el texto se seleccione por accidente al hacer clic rápido */
+        gap: var(--spacing-4);
+        padding: var(--spacing-2) 0;
       }
 
       .interactive-header:hover {
@@ -439,6 +441,23 @@ gsap.registerPlugin(ScrollTrigger);
 
       .interactive-header h2 {
         margin-bottom: 0; /* Anula el margen inferior para alinearse bien con la flecha */
+        display: flex;
+        align-items: flex-start; /* Keeps the icon at the top if the text wraps to 2 lines */
+        gap: var(--spacing-2);
+        margin: 0; /* Removes default margin to prevent layout breaking */
+        flex: 1; /* Forces the text container to take available space without pushing the arrow */
+        word-break: break-word;
+      }
+      .interactive-header mat-icon {
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 900px) {
+        .interactive-header h2 {
+          font-size: var(
+            --text-xl
+          ); /* Scales the font down slightly on mobile */
+        }
       }
 
       .toggle-icon {
@@ -481,9 +500,7 @@ export class ResumePageComponent implements AfterViewInit {
   private currentRotation = 0;
   private previousScrollY = 0;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    
-  }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   toggleExperience() {
     this.showExperience.update((val) => !val);
