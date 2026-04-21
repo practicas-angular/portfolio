@@ -20,7 +20,13 @@ import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-project-carousel',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, TranslatePipe],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    TranslatePipe,
+  ],
   template: `
     <div
       class="carousel-container"
@@ -36,40 +42,55 @@ import { TranslatePipe } from '@ngx-translate/core';
       <div class="carousel-viewport">
         <div class="carousel-track" [style.transform]="trackTransform()">
           @for (project of projects; track project.id) {
-            <div class="carousel-item">
+            <div
+              class="carousel-item"
+              [style.flex]="'0 0 ' + 100 / itemsPerView() + '%'"
+              [style.max-width]="100 / itemsPerView() + '%'"
+            >
               <!-- Surface card using your custom CSS variables -->
-              <mat-card class="card-surface project-card">
-                
+              <mat-card class="card-surface project-card" appGsapHover>
                 <!-- IMPROVEMENT 3: 3D Flip Container -->
                 <div class="flip-card">
                   <div class="flip-card-inner">
-                    
                     <!-- Front of the image -->
                     <div class="flip-card-front">
-                      <img mat-card-image 
-                           [src]="project.img" 
-                           [alt]="project.title"
-                           (error)="handleImageError($event)">
-                    </div>
-                    
-                    <!-- Back of the image (Description) -->
-                    <div class="flip-card-back">
-                      <p>{{ project.description | translate}}</p>
+                      <img
+                        mat-card-image
+                        [src]="project.img"
+                        [alt]="project.title"
+                        (error)="handleImageError($event)"
+                      />
                     </div>
 
+                    <!-- Back of the image (Description) -->
+                    <div class="flip-card-back">
+                      <p>{{ project.description | translate }}</p>
+                    </div>
                   </div>
                 </div>
-                
+
                 <mat-card-content>
-                  <h3 class="text-accent" style="margin-top: 1rem;">{{ project.title | translate}}</h3>
+                  <h3 class="text-accent" style="margin-top: 1rem;">
+                    {{ project.title | translate }}
+                  </h3>
                 </mat-card-content>
-                
+
                 <mat-card-actions class="card-actions">
-                  <a mat-button [href]="project.githubUrl" target="_blank" class="text-muted">
+                  <a
+                    mat-button
+                    [href]="project.githubUrl"
+                    target="_blank"
+                    class="text-muted"
+                  >
                     <mat-icon>code</mat-icon> GitHub
                   </a>
-                  <a mat-raised-button color="accent" [href]="project.deployUrl" target="_blank">
-                    <mat-icon>open_in_new</mat-icon> Ver App
+                  <a
+                    mat-raised-button
+                    color="accent"
+                    [href]="project.deployUrl"
+                    target="_blank"
+                  >
+                    <mat-icon>open_in_new</mat-icon> App
                   </a>
                 </mat-card-actions>
               </mat-card>
@@ -87,113 +108,170 @@ import { TranslatePipe } from '@ngx-translate/core';
         @for (project of projects; track project.id; let i = $index) {
           <!-- Only show dots up to the maximum scrollable index -->
           @if (i <= projects.length - itemsPerView()) {
-            <div class="dot" 
-                 [class.active]="i === currentIndex()"
-                 (click)="goToSlide(i)">
-            </div>
+            <div
+              class="dot"
+              [class.active]="i === currentIndex()"
+              (click)="goToSlide(i)"
+            ></div>
           }
         }
       </div>
     </div>
   `,
-  styles: [`
-    .carousel-container { position: relative; width: 100%; padding: 0 var(--spacing-12); overflow: hidden; }
-    .carousel-viewport { overflow: hidden; width: 100%; }
-    .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
-    .carousel-item { flex: 0 0 100%; padding: var(--spacing-2); }
-    
-    @media (min-width: 768px) { .carousel-item { flex: 0 0 50%; } }
-    @media (min-width: 1024px) { .carousel-item { flex: 0 0 33.333%; } }
-    
-    .project-card { height: 100%; display: flex; flex-direction: column; }
-    
-    /* --- 3D FLIP CSS --- */
-    .flip-card {
-      background-color: transparent;
-      height: 200px;
-      perspective: 1000px; /* Gives the 3D depth effect */
-    }
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
-    }
-    /* Trigger the 360 rotation on hover */
-    .project-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
-    }
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden; /* Hides the back when looking at the front */
-      border-bottom: 1px solid var(--color-bg-default);
-      border-radius: 20px;
-    }
-    .flip-card-front img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .flip-card-back {
-      background-color: var(--color-bg-inverse); /* Dark background for the back */
-      color: var(--color-text-inverse); /* White text */
-      transform: rotateY(180deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--spacing-4);
-      font-size: var(--text-sm);
-    }
+  styles: [
+    `
+      .carousel-container {
+        position: relative;
+        width: 100%;
+        padding: 0 var(--spacing-12);
+        overflow: hidden;
+      }
+      .carousel-viewport {
+        overflow: hidden;
+        width: 100%;
+      }
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        will-change: transform;
+      }
+      .carousel-item {
+        padding: var(--spacing-2);
+        box-sizing: border-box;
+      }
 
-    .card-actions { margin-top: auto; display: flex; justify-content: space-between; padding: var(--spacing-2) var(--spacing-4); }
-    
-    .nav-button {
-      position: absolute;
-      top: calc(50% - 20px);
-      transform: translateY(-50%);
-      z-index: 10;
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform var(--transition-fast);
-    }
-    .nav-button:hover { transform: translateY(-50%) scale(1.2); } /* Grow slightly on hover */
-    .nav-button mat-icon { font-size: 3rem; width: 3rem; height: 3rem; }
-    .nav-button.prev { left: 0; }
-    .nav-button.next { right: 0; }
-    
-    /* Dot Indicators */
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: var(--spacing-2);
-      margin-top: var(--spacing-4);
-    }
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background-color: var(--color-text-muted);
-      cursor: pointer;
-      transition: background-color var(--transition-fast), transform var(--transition-fast);
-    }
-    .dot.active {
-      background-color: var(--color-accent);
-    }
+      .carousel-container {
+        padding: 0 var(--spacing-12);
+      }
+      @media (max-width: 768px) {
+        .project-card .mat-mdc-card-actions button {
+          font-size: var(--text-xs);
+          padding: 0 var(--spacing-2);
+          letter-spacing: normal;
+        }
+        .carousel-container {
+          padding: 0 var(--spacing-8);
+        }
+      }
 
-    .text-muted { color: var(--color-text-muted); }
-    .text-accent { color: var(--color-accent); font-weight: var(--weight-bold); }
-  `]
+      .project-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* --- 3D FLIP CSS --- */
+      .flip-card {
+        background-color: transparent;
+        height: 200px;
+        perspective: 1000px; /* Gives the 3D depth effect */
+      }
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.8s;
+        transform-style: preserve-3d;
+      }
+      /* Trigger the 360 rotation on hover */
+      .project-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-card-front,
+      .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden; /* Hides the back when looking at the front */
+        border-bottom: 1px solid var(--color-bg-default);
+        border-radius: 20px;
+      }
+      .flip-card-front img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .flip-card-back {
+        background-color: var(
+          --color-bg-inverse
+        ); /* Dark background for the back */
+        color: var(--color-text-inverse); /* White text */
+        transform: rotateY(180deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--spacing-4);
+        font-size: var(--text-sm);
+      }
+
+      .card-actions {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        padding: var(--spacing-2) var(--spacing-4);
+      }
+
+      .nav-button {
+        position: absolute;
+        top: calc(50% - 20px);
+        transform: translateY(-50%);
+        z-index: 10;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform var(--transition-fast);
+      }
+      .nav-button:hover {
+        transform: translateY(-50%) scale(1.2);
+      } /* Grow slightly on hover */
+      .nav-button mat-icon {
+        font-size: 3rem;
+        width: 3rem;
+        height: 3rem;
+      }
+      .nav-button.prev {
+        left: 0;
+      }
+      .nav-button.next {
+        right: 0;
+      }
+
+      /* Dot Indicators */
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-2);
+        margin-top: var(--spacing-4);
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: var(--color-text-muted);
+        cursor: pointer;
+        transition:
+          background-color var(--transition-fast),
+          transform var(--transition-fast);
+      }
+      .dot.active {
+        background-color: var(--color-accent);
+      }
+
+      .text-muted {
+        color: var(--color-text-muted);
+      }
+      .text-accent {
+        color: var(--color-accent);
+        font-weight: var(--weight-bold);
+      }
+    `,
+  ],
 })
 export class ProjectCarouselComponent implements OnInit, OnDestroy {
-
   defaultImgUrl = DEFAULT_IMG_URL;
   projects = PROJECTS_DATA;
 
@@ -201,7 +279,7 @@ export class ProjectCarouselComponent implements OnInit, OnDestroy {
   itemsPerView = signal(1);
   private autoMoveSub!: Subscription;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   // Computed signal to calculate the CSS transform percentage dynamically
   trackTransform = computed(() => {

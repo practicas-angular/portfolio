@@ -34,7 +34,13 @@ import { LANGUAGES } from '../../constants/core.data';
   ],
   template: `
     <mat-toolbar color="primary" class="header-toolbar">
-      <span class="portfolio-title nav-button" (click)="navHome()" routerLink="/" style="font-weight: 600; cursor: pointer;" fragment="start">
+      <span
+        class="portfolio-title nav-button"
+        (click)="navHome()"
+        routerLink="/"
+        style="font-weight: 600; cursor: pointer;"
+        fragment="start"
+      >
         Gabino Muriel | {{ 'NAVBAR.PORTFOLIO' | translate }}</span
       >
       <span class="spacer"></span>
@@ -62,12 +68,23 @@ import { LANGUAGES } from '../../constants/core.data';
             <mat-icon>phone</mat-icon> +34 669 264 151
           </button>
         </mat-menu>
-        <button mat-button class="nav-button" routerLink="/">
+        <button
+          mat-button
+          class="nav-button"
+          routerLink="/"
+          routerLinkActive="active-route"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
           {{ 'NAVBAR.EXPERIENCE' | translate }}
         </button>
         @if (isBrowserReady()) {
           @if (auth.currentUser().role !== 'Guest') {
-            <button mat-button class="nav-button" routerLink="/dashboard">
+            <button
+              mat-button
+              class="nav-button"
+              routerLink="/dashboard"
+              routerLinkActive="active-route"
+            >
               {{ 'NAVBAR.DASHBOARD' | translate }}
             </button>
           }
@@ -170,14 +187,23 @@ import { LANGUAGES } from '../../constants/core.data';
             <span>Contacto</span>
           </button>
 
-          <button mat-menu-item routerLink="/">
+          <button
+            mat-menu-item
+            routerLink="/"
+            routerLinkActive="active-route"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <mat-icon>work</mat-icon>
             <span>{{ 'NAVBAR.EXPERIENCE' | translate }}</span>
           </button>
 
           @if (isBrowserReady()) {
             @if (auth.currentUser().role !== 'Guest') {
-              <button mat-menu-item routerLink="/dashboard">
+              <button
+                mat-menu-item
+                routerLink="/dashboard"
+                routerLinkActive="active-route"
+              >
                 <mat-icon>dashboard</mat-icon>
                 <span>{{ 'NAVBAR.DASHBOARD' | translate }}</span>
               </button>
@@ -326,6 +352,19 @@ import { LANGUAGES } from '../../constants/core.data';
       .nav-button {
         vertical-align: middle !important;
       }
+
+      .active-route {
+        color: var(--color-accent) !important;
+        font-weight: var(--weight-bold);
+        border-bottom: 2px solid var(--color-accent); /* Optional: adds a nice underline indicator */
+      }
+
+      /* Specific targeting to ensure the mobile menu icons and text also change color */
+      .active-route mat-icon,
+      .active-route span {
+        color: var(--color-accent) !important;
+        font-weight: var(--weight-bold);
+      }
     `,
   ],
 })
@@ -416,8 +455,9 @@ export class HeaderComponent {
   }
 
   navHome() {
-  this.router.navigate(['/']);
-  
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+    this.router.navigate(['/']);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
 }
