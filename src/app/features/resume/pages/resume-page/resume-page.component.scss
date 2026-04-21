@@ -1,0 +1,254 @@
+.text-muted {
+    color: var(--color-text-muted);
+}
+
+.text-accent {
+    color: var(--color-accent);
+    font-weight: var(--weight-medium);
+}
+
+header {
+    margin-top: var(--spacing-6);
+}
+
+.skills-section {
+    margin-top: var(--spacing-12);
+}
+
+.experience-section {
+    margin-top: var(--spacing-16);
+}
+
+.section-header h2 {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+mat-chip {
+    font-family: var(--font-secondary);
+}
+
+.skills-section mat-chip {
+    --mdc-chip-label-text-color: var(--color-text-muted);
+    --mdc-chip-elevated-container-color: var(--color-bg-surface);
+}
+
+.skills-section mat-chip:hover {
+    --mdc-chip-elevated-container-color: var(--color-bg-surface);
+    --mdc-chip-label-text-color: var(--color-primary);
+    border-color: var(--color-accent);
+}
+
+.education-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+}
+
+@media (min-width: 768px) {
+    .education-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .education-icon {
+        position: relative;
+        right: 10px;
+    }
+}
+
+.education-card {
+    border-left: 4px solid var(--color-accent);
+    /* Adds a nice architectural touch */
+    height: 100%;
+}
+
+.clutch-controls,
+.mechanical-system {
+    display: none;
+}
+
+@media (min-width: 1450px) {
+    .clutch-controls-track {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+
+        pointer-events: none;
+        z-index: 50;
+    }
+
+    .clutch-controls {
+        display: block;
+        position: sticky;
+
+        top: calc(100vh - 120px);
+
+        margin-left: auto;
+        margin-right: var(--spacing-8);
+        width: max-content;
+
+        pointer-events: auto;
+
+        background: var(--color-bg-surface);
+        padding: var(--spacing-4);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--shadow-lg);
+        border-left: 4px solid var(--color-accent);
+    }
+
+    .clutch-controls .mat-mdc-raised-button[disabled] {
+        --mdc-protected-button-disabled-label-text-color: var(--color-text-muted);
+
+        opacity: 0.7;
+    }
+
+    .mechanical-system {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150px;
+        height: 105%;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    /* LA CREMALLERA REPETIDA */
+    .rack {
+        position: absolute;
+        top: -46px;
+        left: 0;
+        width: 30px;
+        /* AJUSTA este valor al grosor de tu imagen de cremallera */
+        height: 100%;
+
+        /* El truco para repetir la imagen de 1/5 infinitamente: */
+        background-image: url('/assets/img/gear_rack/rack.png');
+        /* Sustituye por tu ruta */
+        background-repeat: repeat-y;
+        background-size: 100% auto;
+        /* Asegura que el ancho encaje y el alto mantenga la proporción */
+        filter: var(--img-theme-filter);
+    }
+
+    .gear-wrapper {
+        position: sticky;
+        top: 150px;
+        left: 15px;
+        width: 100px;
+        height: 100px;
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        will-change: transform;
+        filter: var(--img-theme-filter);
+    }
+
+    .gear-wrapper.uncoupled {
+        transform: translateX(1.4rem);
+    }
+
+    /* TU IMAGEN DE ENGRANAJE DE 100x100 */
+    .gear-element {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        /* Evita que la imagen se deforme */
+        will-change: transform;
+    }
+}
+
+.pulse-attention {
+    animation: pulse-ring 1.5s infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+        /* Starts with a tight accent-colored shadow */
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(245, 158, 11, 0);
+        /* Expands outward and fades out */
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+    }
+}
+
+/* Estilos para que el Header parezca un botón desplegable */
+.interactive-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: var(--spacing-2);
+    border-bottom: 2px solid transparent;
+    transition: border-color var(--transition-fast);
+    user-select: none;
+    /* Evita que el texto se seleccione por accidente al hacer clic rápido */
+    gap: var(--spacing-4);
+    padding: var(--spacing-2) 0;
+}
+
+.interactive-header:hover {
+    border-bottom: 2px solid var(--color-accent);
+    /* Subrayado azul al pasar el ratón */
+}
+
+.interactive-header h2 {
+    margin-bottom: 0;
+    /* Anula el margen inferior para alinearse bien con la flecha */
+    display: flex;
+    align-items: flex-start;
+    /* Keeps the icon at the top if the text wraps to 2 lines */
+    gap: var(--spacing-2);
+    margin: 0;
+    /* Removes default margin to prevent layout breaking */
+    flex: 1;
+    /* Forces the text container to take available space without pushing the arrow */
+    word-break: break-word;
+}
+
+.interactive-header mat-icon {
+    flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+    .interactive-header h2 {
+        font-size: var(--text-xl);
+        /* Scales the font down slightly on mobile */
+    }
+}
+
+.toggle-icon {
+    color: var(--color-text-muted);
+    transform: scale(1.2);
+    /* Hace la flecha un poco más grande */
+    transition: color var(--transition-fast);
+}
+
+.interactive-header:hover .toggle-icon {
+    color: var(--color-accent);
+}
+
+/* Animación suave para cuando el bloque @if inserta el contenido en el DOM */
+.fade-in-dropdown {
+    animation: fadeInDown 0.4s ease-out forwards;
+    margin-top: var(--spacing-6);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

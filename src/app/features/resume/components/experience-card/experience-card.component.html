@@ -1,1 +1,11 @@
-<p>experience-card works!</p>
+<mat-card class="card-surface">
+    <mat-card-header>
+        <mat-card-title>{{ experienceData().role | translate}} -
+            {{ experienceData().company | translate}}</mat-card-title>
+        <mat-card-subtitle>{{ experienceData().period | translate}} |
+            {{ experienceData().location | translate}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>{{ experienceData().description | translate}}</p>
+    </mat-card-content>
+</mat-card>

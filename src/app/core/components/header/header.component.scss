@@ -1,0 +1,60 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.header-toolbar {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+}
+
+.portfolio-title {
+    font-family: var(--font-secondary);
+    font-weight: var(--weight-bold);
+}
+
+.nav-button {
+    color: var(--color-text-inverse) !important;
+    transition: color var(--transition-fast);
+}
+
+.nav-button:hover {
+    color: var(--color-accent) !important;
+}
+
+.login-button {
+    margin-left: var(--spacing-4);
+    background-color: var(--color-accent) !important;
+    color: var(--color-text-inverse) !important;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 1450px) {
+    .desktop-nav {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+}
+
+.nav-button {
+    vertical-align: middle !important;
+}
+
+.active-route {
+    color: var(--color-accent) !important;
+    font-weight: var(--weight-bold);
+    border-bottom: 2px solid var(--color-accent);
+    /* Optional: adds a nice underline indicator */
+}
+
+/* Specific targeting to ensure the mobile menu icons and text also change color */
+.active-route mat-icon,
+.active-route span {
+    color: var(--color-accent) !important;
+    font-weight: var(--weight-bold);
+}

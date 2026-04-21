@@ -1,1 +1,19 @@
-<p>signup-dialog works!</p>
+<h2 mat-dialog-title class="text-primary">Nuevo Usuario</h2>
+<mat-dialog-content>
+    <p class="text-muted" style="margin-bottom: 16px;">
+        {{ 'AUTH.CHOOSE_USERNAME' | translate }}
+    </p>
+
+    <!-- Material Input Field -->
+    <mat-form-field appearance="outline" style="width: 100%; margin-top: 8px;">
+        <mat-label>{{ 'AUTH.USERNAME_LABEL' | translate }}</mat-label>
+        <input matInput [(ngModel)]="username" cdkFocusInitial (keyup.enter)="submit()" />
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
+    <button mat-raised-button color="accent" (click)="submit()" [disabled]="!username.trim()">
+        {{ 'COMMON.ENTER' | translate }}
+    </button>
+</mat-dialog-actions>

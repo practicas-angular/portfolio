@@ -1,1 +1,38 @@
-<p>footer works!</p>
+<footer class="footer-container">
+    <div class="container footer-content">
+        <!-- Brand / Identity -->
+        <div class="footer-brand">
+            <h3>José Gabino Muriel Sánchez</h3>
+            <p class="text-muted">
+                {{ "FOOTER.SUBTITLE" | translate }}
+            </p>
+        </div>
+
+        <div class="footer-socials">
+            <a mat-icon-button href="https://github.com/jgmuriels01" target="_blank" aria-label="GitHub">
+                <mat-icon>code</mat-icon>
+            </a>
+            <a mat-icon-button href="https://www.linkedin.com/in/jose-gabino-muriel-sanchez-8a1850143" target="_blank"
+                aria-label="LinkedIn">
+                <mat-icon>work</mat-icon>
+            </a>
+            <button mat-icon-button (click)="
+              copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')
+            " matTooltip="'CONTACT.COPY_EMAIL' | translate">
+                <mat-icon>email</mat-icon>
+            </button>
+            <button mat-icon-button (click)="copyToClipboard('+34 669 264 151', 'Phone')"
+                matTooltip="'CONTACT.COPY_PHONE' | translate">
+                <mat-icon>phone</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <!-- Copyright & i18n support -->
+    <div class="footer-bottom">
+        <p>
+            &copy; {{ currentYear }} Gabino Muriel.
+            {{ "FOOTER.COPYRIGHT" | translate }}
+        </p>
+    </div>
+</footer>

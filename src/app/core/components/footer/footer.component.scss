@@ -1,0 +1,66 @@
+.footer-container {
+        /* Using your dark inverse background for high contrast */
+        background-color: var(--color-bg-inverse);
+        color: var(--color-text-inverse);
+        padding-top: var(--spacing-8);
+        border-top: 4px solid var(--color-accent);
+        margin-top: auto;
+      }
+
+      .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--spacing-4);
+        margin-bottom: var(--spacing-6);
+      }
+
+      /* Responsive layout: Side-by-side on tablets and up */
+      @media (min-width: 768px) {
+        .footer-content {
+          flex-direction: row;
+          justify-content: space-between;
+          text-align: left;
+        }
+      }
+
+      .footer-brand h3 {
+        color: var(--color-text-inverse);
+        margin-bottom: var(--spacing-1);
+        font-family: var(--font-secondary);
+      }
+
+      /* Overriding the text-muted variable specifically for the dark footer */
+      .text-muted {
+        color: #94a3b8; /* A lighter gray that reads well on dark backgrounds */
+        margin: 0;
+      }
+
+      .footer-socials {
+        gap: var(--spacing-4);
+      }
+
+      .footer-socials a,
+      .footer-socials button {
+        color: var(--color-text-inverse);
+        transition:
+          color var(--transition-fast),
+          transform var(--transition-fast);
+      }
+
+      .footer-socials a:hover,
+      .footer-socials button:hover {
+        color: var(--color-accent);
+        transform: translateY(-3px); /* Small GSAP-like hover bounce */
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding: var(--spacing-4);
+        background-color: var(
+          --color-primary
+        ); /* Deep slate for the bottom strip */
+        font-size: var(--text-sm);
+        color: #94a3b8;
+      }

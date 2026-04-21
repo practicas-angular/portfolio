@@ -7,23 +7,7 @@ import { FooterComponent } from "./core/components/footer/footer.component";
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, HeaderComponent],
-  template: `
-
-    <app-header></app-header>
-    <main class="main-content">
-      <router-outlet></router-outlet>
-    </main>
-  `,
-  styles: [`
-  app-header{
-    position: sticky;
-    top: 0px;
-    z-index: 1000;
-  }
-    main {
-      padding-top: var(--spacing-8); 
-      min-height: 100vh;
-    }
-  `]
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent { }

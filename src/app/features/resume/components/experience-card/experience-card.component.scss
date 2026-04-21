@@ -1,0 +1,13 @@
+mat-card {
+    margin-bottom: var(--spacing-6);
+    border-radius: var(--border-radius-md);
+}
+
+mat-card-title {
+    color: var(--color-primary);
+    font-weight: var(--weight-bold);
+}
+
+mat-card-content {
+    margin-top: var(--spacing-4);
+}

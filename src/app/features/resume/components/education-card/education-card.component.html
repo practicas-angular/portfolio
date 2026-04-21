@@ -1,1 +1,23 @@
-<p>education-card works!</p>
+<mat-card class="card-surface education-card">
+    <mat-card-header>
+        <div mat-card-avatar>
+            <mat-icon class="education-icon" color="primary"
+                style="transform: scale(1.5); margin-top: 8px;">account_balance</mat-icon>
+        </div>
+        <mat-card-title class="text-primary" style="margin-bottom: 4px;">{{ educationData().degree | translate
+            }}</mat-card-title>
+        <mat-card-subtitle class="text-accent">{{
+            educationData().institution | translate
+            }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="margin-left: 2rem;">
+        <p class="text-muted" style="margin: 0;">
+            <mat-icon inline="true" style="vertical-align: middle; font-size: 16px;">location_on</mat-icon>
+            {{ educationData().location | translate}}
+        </p>
+        <p class="text-muted" style="margin: 0;">
+            <mat-icon inline="true" style="vertical-align: middle; font-size: 16px;">calendar_today</mat-icon>
+            {{ educationData().period | translate}}
+        </p>
+    </mat-card-content>
+</mat-card>

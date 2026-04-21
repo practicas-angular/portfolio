@@ -1,1 +1,123 @@
-<p>dashboard-page works!</p>
+<div class="dashboard-wrapper container">
+    <header class="gsap-reveal" style="margin-bottom: var(--spacing-8); margin-top: var(--spacing-6);">
+        <h1>{{ 'DASHBOARD_PAGE.TITLE' | translate }}</h1>
+        <p class="text-muted">
+            {{ 'DASHBOARD_PAGE.SUBTITLE' | translate }}
+        </p>
+    </header>
+
+    <section class="stats-grid gsap-reveal" style="margin-bottom: var(--spacing-8);">
+        <mat-card class="card-surface stat-card">
+            <div class="stat-content">
+                <mat-icon color="primary">people</mat-icon>
+                <div class="stat-text">
+                    <h3>{{ activeUsersService.totalUsers() }}</h3>
+                    <p class="text-muted">{{ 'DASHBOARD_PAGE.STATS.TOTAL' | translate }}</p>
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card class="card-surface stat-card">
+            <div class="stat-content">
+                <mat-icon color="accent">admin_panel_settings</mat-icon>
+                <div class="stat-text">
+                    <h3>{{ activeUsersService.activeAdmins() }}</h3>
+                    <p class="text-muted">{{ 'DASHBOARD_PAGE.STATS.ADMINS' | translate }}</p>
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card class="card-surface stat-card">
+            <div class="stat-content">
+                <mat-icon color="primary">person</mat-icon>
+                <div class="stat-text">
+                    <h3>{{ activeUsersService.activeUsers() }}</h3>
+                    <p class="text-muted">{{ 'DASHBOARD_PAGE.STATS.USERS' | translate }}</p>
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card class="card-surface stat-card">
+            <div class="stat-content">
+                <mat-icon>public</mat-icon>
+                <div class="stat-text">
+                    <h3>{{ activeUsersService.activeGuests() }}</h3>
+                    <p class="text-muted">{{ 'DASHBOARD_PAGE.STATS.GUESTS' | translate }}</p>
+                </div>
+            </div>
+        </mat-card>
+    </section>
+
+    <div class="dashboard-grid">
+        <!-- Wikipedia SSE Feed Section -->
+        <section class="sse-section">
+            <div class="section-header gsap-reveal">
+                <h2>
+                    <mat-icon color="accent">public</mat-icon> {{ 'DASHBOARD_PAGE.WIKIPEDIA.TITLE' | translate }}
+                </h2>
+                <p class="text-muted">
+                    {{ 'DASHBOARD_PAGE.WIKIPEDIA.SUBTITLE' | translate }}
+                </p>
+            </div>
+
+            <div class="feed-container">
+                @for (edit of recentEdits(); track edit.id) {
+                <mat-card class="card-surface edit-card">
+                    <mat-card-header>
+                        <mat-card-title class="text-accent">{{
+                            edit.title
+                            }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'DASHBOARD_PAGE.WIKIPEDIA.EDITED_BY' | translate }}
+                            <strong>{{ edit.user }}</strong></mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-actions>
+                        <a mat-button color="primary" [href]="edit.wikiUrl" target="_blank">{{
+                            'DASHBOARD_PAGE.WIKIPEDIA.VIEW_ARTICLE' | translate }}</a>
+                    </mat-card-actions>
+                </mat-card>
+                } @empty {
+                <p class="text-muted gsap-reveal">
+                    {{ 'DASHBOARD_PAGE.WIKIPEDIA.WAITING' | translate }}
+                </p>
+                }
+            </div>
+        </section>
+
+        <!-- WebSocket Guestbook Section -->
+        <section class="websocket-section gsap-reveal">
+            <div class="section-header">
+                <h2>
+                    <mat-icon color="primary">forum</mat-icon> {{ 'DASHBOARD_PAGE.GUESTBOOK.TITLE' | translate }}
+                </h2>
+                <p class="text-muted">
+                    {{ 'DASHBOARD_PAGE.GUESTBOOK.SUBTITLE' | translate }}
+                    <strong>{{ auth.currentUser().username }}</strong>
+                </p>
+            </div>
+
+            <mat-card class="card-surface chat-container">
+                <mat-card-content class="chat-messages">
+                    @for (msg of pusherService.messages(); track msg.timestamp) {
+                    <div class="chat-message">
+                        <span class="chat-user text-accent">{{ msg.username }}:</span>
+                        <span class="chat-text">{{ msg.message }}</span>
+                    </div>
+                    } @empty {
+                    <p class="text-muted" style="text-align: center; margin-top: 1rem;">
+                        {{ 'DASHBOARD_PAGE.GUESTBOOK.NO_MESSAGES' | translate }}
+                    </p>
+                    }
+                </mat-card-content>
+
+                <mat-card-actions class="chat-input-area">
+                    <input type="text" class="chat-input"
+                        [placeholder]="'DASHBOARD_PAGE.GUESTBOOK.PLACEHOLDER' | translate" [(ngModel)]="newMessageInput"
+                        (keyup.enter)="sendChatMessage()" />
+                    <button mat-raised-button (click)="sendChatMessage()" [disabled]="!newMessageInput.trim()">
+                        {{ 'COMMON.SEND' | translate }}
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </section>
+    </div>
+</div>

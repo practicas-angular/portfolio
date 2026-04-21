@@ -1,0 +1,10 @@
+app-header {
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+}
+
+main {
+    padding-top: var(--spacing-8);
+    min-height: 100vh;
+}
