@@ -24,8 +24,9 @@ import {
 } from '@angular/material/card';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MatButtonModule } from '@angular/material/button';
-import { EducationCardComponent } from "../../components/education-card/education-card.component";
+import { EducationCardComponent } from '../../components/education-card/education-card.component';
 import { TranslatePipe } from '@ngx-translate/core';
+import { FooterComponent } from '../../../../core/components/footer/footer.component';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,8 +43,9 @@ gsap.registerPlugin(ScrollTrigger);
     MatIconModule,
     MatButtonModule,
     EducationCardComponent,
-    TranslatePipe
-],
+    TranslatePipe,
+    FooterComponent,
+  ],
   template: `
     <div class="resume-page-wrapper" style="position: relative;">
       <div class="clutch-controls-track">
@@ -55,7 +57,7 @@ gsap.registerPlugin(ScrollTrigger);
             class="text-muted"
             style="margin-bottom: 4px; font-size: 12px; font-weight: bold;"
           >
-            {{"RESUME_PAGE.MECHANISM.TITLE" | translate}}
+            {{ 'RESUME_PAGE.MECHANISM.TITLE' | translate }}
           </p>
           <div style="display: flex; gap: 8px;">
             <button
@@ -63,14 +65,16 @@ gsap.registerPlugin(ScrollTrigger);
               (click)="toggleClutch(true)"
               [disabled]="isCoupled()"
             >
-              <mat-icon>link</mat-icon> {{"RESUME_PAGE.MECHANISM.COUPLE" | translate}}
+              <mat-icon>link</mat-icon>
+              {{ 'RESUME_PAGE.MECHANISM.COUPLE' | translate }}
             </button>
             <button
               mat-raised-button
               (click)="toggleClutch(false)"
               [disabled]="!isCoupled()"
             >
-              <mat-icon>link_off</mat-icon> {{"RESUME_PAGE.MECHANISM.UNCOUPLE" | translate}}
+              <mat-icon>link_off</mat-icon>
+              {{ 'RESUME_PAGE.MECHANISM.UNCOUPLE' | translate }}
             </button>
           </div>
         </div>
@@ -96,7 +100,7 @@ gsap.registerPlugin(ScrollTrigger);
         class="resume-container container"
         style="padding-top: var(--spacing-8); padding-bottom: var(--spacing-16);"
       >
-        <section class="gsap-reveal">
+        <section class="gsap-reveal" id="start">
           <h1 class="text-primary">José Gabino Muriel Sánchez</h1>
           <div
             style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;"
@@ -122,23 +126,25 @@ gsap.registerPlugin(ScrollTrigger);
               <mat-icon inline="true" style="font-size: 10px;"
                 >location_on</mat-icon
               >
-              Mérida ({{"RESUME_PAGE.SPAIN" | translate}})
+              Mérida ({{ 'RESUME_PAGE.SPAIN' | translate }})
             </span>
           </div>
           <h2 class="text-accent">
-            {{"RESUME_PAGE.TITLE" | translate}}
+            {{ 'RESUME_PAGE.TITLE' | translate }}
           </h2>
 
           <p>
-            {{"RESUME_PAGE.SUBTITLE" | translate}}
+            {{ 'RESUME_PAGE.SUBTITLE' | translate }}
           </p>
         </section>
 
         <!-- Tecnologías y Lenguajes (Foco Principal) -->
         <section class="skills-section gsap-reveal">
-          <h3>{{"RESUME_PAGE.TECH_STACK.TITLE" | translate}}</h3>
+          <h3>{{ 'RESUME_PAGE.TECH_STACK.TITLE' | translate }}</h3>
 
-          <h4 class="text-muted">{{"RESUME_PAGE.TECH_STACK.ADVANCE" | translate}}</h4>
+          <h4 class="text-muted">
+            {{ 'RESUME_PAGE.TECH_STACK.ADVANCE' | translate }}
+          </h4>
           <mat-chip-set>
             <mat-chip>Java</mat-chip>
             <mat-chip>JavaScript</mat-chip>
@@ -147,7 +153,7 @@ gsap.registerPlugin(ScrollTrigger);
           </mat-chip-set>
 
           <h4 class="text-muted" style="margin-top: 1rem;">
-            {{"RESUME_PAGE.TECH_STACK.INTERMEDIATE" | translate}}
+            {{ 'RESUME_PAGE.TECH_STACK.INTERMEDIATE' | translate }}
           </h4>
           <mat-chip-set>
             <mat-chip>React</mat-chip>
@@ -157,7 +163,7 @@ gsap.registerPlugin(ScrollTrigger);
           </mat-chip-set>
 
           <h4 class="text-muted" style="margin-top: 1rem;">
-            {{"RESUME_PAGE.TECH_STACK.DATA_ANALYSIS" | translate}}
+            {{ 'RESUME_PAGE.TECH_STACK.DATA_ANALYSIS' | translate }}
           </h4>
           <mat-chip-set>
             <mat-chip>PowerBI</mat-chip>
@@ -171,10 +177,11 @@ gsap.registerPlugin(ScrollTrigger);
         >
           <div class="section-header" style="margin-bottom: var(--spacing-6);">
             <h2>
-              <mat-icon color="accent">code</mat-icon> {{"RESUME_PAGE.PROJECTS.TITLE" | translate}}
+              <mat-icon color="accent">code</mat-icon>
+              {{ 'RESUME_PAGE.PROJECTS.TITLE' | translate }}
             </h2>
             <p class="text-muted">
-              {{"RESUME_PAGE.PROJECTS.SUBTITLE" | translate}}
+              {{ 'RESUME_PAGE.PROJECTS.SUBTITLE' | translate }}
             </p>
           </div>
 
@@ -192,7 +199,8 @@ gsap.registerPlugin(ScrollTrigger);
             (click)="toggleExperience()"
           >
             <h2>
-              <mat-icon color="accent">work</mat-icon> {{"RESUME_PAGE.EXPERIENCE.TITLE" | translate}}
+              <mat-icon color="accent">work</mat-icon>
+              {{ 'RESUME_PAGE.EXPERIENCE.TITLE' | translate }}
             </h2>
             <!-- El icono cambia de flecha hacia abajo a flecha hacia arriba -->
             <mat-icon class="toggle-icon">{{
@@ -224,7 +232,8 @@ gsap.registerPlugin(ScrollTrigger);
             (click)="toggleEducation()"
           >
             <h2>
-              <mat-icon color="accent">school</mat-icon> {{"RESUME_PAGE.EDUCATION.TITLE" | translate}}
+              <mat-icon color="accent">school</mat-icon>
+              {{ 'RESUME_PAGE.EDUCATION.TITLE' | translate }}
             </h2>
             <mat-icon class="toggle-icon">{{
               showEducation() ? 'expand_less' : 'expand_more'
@@ -241,6 +250,7 @@ gsap.registerPlugin(ScrollTrigger);
         </section>
       </div>
     </div>
+    <app-footer></app-footer>
   `,
   styles: [
     `
@@ -277,7 +287,7 @@ gsap.registerPlugin(ScrollTrigger);
 
       .skills-section mat-chip:hover {
         --mdc-chip-elevated-container-color: var(--color-bg-surface);
-        --mdc-chip-label-text-color: var( --color-primary);
+        --mdc-chip-label-text-color: var(--color-primary);
         border-color: var(--color-accent);
       }
 

@@ -11,7 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { RouterModule } from '@angular/router'; // Added for routerLink
+import { Router, RouterModule } from '@angular/router'; // Added for routerLink
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -30,69 +30,81 @@ import { LANGUAGES } from '../../constants/core.data';
     MatMenuModule,
     RouterModule,
     MatDialogModule,
-    TranslateModule
+    TranslateModule,
   ],
   template: `
     <mat-toolbar color="primary" class="header-toolbar">
-      <span class="portfolio-title"
-        >Gabino Muriel | {{ "NAVBAR.PORTFOLIO" | translate}}</span
+      <span class="portfolio-title nav-button" (click)="navHome()" routerLink="/" style="font-weight: 500; cursor: pointer;" fragment="start">
+        Gabino Muriel | {{ 'NAVBAR.PORTFOLIO' | translate }}</span
       >
       <span class="spacer"></span>
 
       <!-- ========================================= -->
       <!-- DESKTOP NAVIGATION (Hidden < 1450px)      -->
       <!-- ========================================= -->
-       <div class="desktop-nav">
+      <div class="desktop-nav">
         <button mat-button [matMenuTriggerFor]="contactMenu" class="nav-button">
           <mat-icon>contact_mail</mat-icon> Contacto
         </button>
         <mat-menu #contactMenu="matMenu">
           <button
             mat-menu-item
-            (click)="copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')"
+            (click)="
+              copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')
+            "
           >
             <mat-icon>email</mat-icon> gabino.muriel.sanchez&#64;gmail.com
           </button>
           <button
             mat-menu-item
-            (click)="copyToClipboard('+34 669 264 151', 'Teléfono')"
+            (click)="copyToClipboard('+34 669 264 151', 'Phone')"
           >
             <mat-icon>phone</mat-icon> +34 669 264 151
           </button>
         </mat-menu>
         <button mat-button class="nav-button" routerLink="/">
-          {{ "NAVBAR.EXPERIENCE" | translate}}
+          {{ 'NAVBAR.EXPERIENCE' | translate }}
         </button>
         @if (isBrowserReady()) {
           @if (auth.currentUser().role !== 'Guest') {
             <button mat-button class="nav-button" routerLink="/dashboard">
-              {{ "NAVBAR.DASHBOARD" | translate}}
+              {{ 'NAVBAR.DASHBOARD' | translate }}
             </button>
           }
         }
 
         <button mat-button class="nav-button" [matMenuTriggerFor]="roleMenu">
           <mat-icon>security</mat-icon>
-          {{ "NAVBAR.ROLE" | translate}}: {{ auth.currentUser().role }}
+          {{ 'NAVBAR.ROLE' | translate }}: {{ auth.currentUser().role }}
         </button>
         <mat-menu #roleMenu="matMenu">
           <button mat-menu-item (click)="loginAs('Gabino (Admin)', 'Admin')">
-            {{ "NAVBAR.ROLES.ADMIN" | translate}}
+            {{ 'NAVBAR.ROLES.ADMIN' | translate }}
           </button>
           <button mat-menu-item (click)="loginAs('Reclutador', 'User')">
-            {{ "NAVBAR.ROLES.USER" | translate}}
+            {{ 'NAVBAR.ROLES.USER' | translate }}
           </button>
-          <button mat-menu-item (click)="logout()">{{ "NAVBAR.ROLES.GUEST" | translate}} ({{ "COMMON.LOGOUT" | translate}})</button>
+          <button mat-menu-item (click)="logout()">
+            {{ 'NAVBAR.ROLES.GUEST' | translate }} ({{
+              'COMMON.LOGOUT' | translate
+            }})
+          </button>
         </mat-menu>
 
         <button mat-button class="nav-button" [matMenuTriggerFor]="langMenu">
           <mat-icon>language</mat-icon>
-          {{ "NAVBAR.LANGUAGE" | translate}}
+          {{ 'NAVBAR.LANGUAGE' | translate }}
         </button>
         <mat-menu #langMenu="matMenu">
-          <button mat-menu-item (click)="changeLang('es')">{{ "NAVBAR.LANGUAGES.SPANISH" | translate}}</button>
-          <button mat-menu-item (click)="changeLang('en')">{{ "NAVBAR.LANGUAGES.ENGLISH" | translate}}</button>
-          <button mat-menu-item (click)="changeLang('pt')">{{ "NAVBAR.LANGUAGES.PORTUGUESE" | translate}}</button>
+          <button mat-menu-item (click)="changeLang('es')">
+            {{ 'NAVBAR.LANGUAGES.SPANISH' | translate }}
+          </button>
+          <button mat-menu-item (click)="changeLang('en')">
+            {{ 'NAVBAR.LANGUAGES.ENGLISH' | translate }}
+          </button>
+          <button mat-menu-item (click)="changeLang('pt')">
+            {{ 'NAVBAR.LANGUAGES.PORTUGUESE' | translate }}
+          </button>
         </mat-menu>
 
         <button
@@ -100,6 +112,7 @@ import { LANGUAGES } from '../../constants/core.data';
           (click)="toggleTheme()"
           matTooltip="Alternar Tema"
           class="nav-button"
+          style="width: auto; borderColor: red !important;"
         >
           <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
         </button>
@@ -112,11 +125,16 @@ import { LANGUAGES } from '../../constants/core.data';
               [disabled]="auth.isLoading()"
               (click)="simulateSignup()"
             >
-              {{ auth.isLoading() ? ("COMMON.LOADING" | translate) : ("COMMON.SIGNUP" | translate) }}
+              {{
+                auth.isLoading()
+                  ? ('COMMON.LOADING' | translate)
+                  : ('COMMON.SIGNUP' | translate)
+              }}
             </button>
           } @else {
             <span style="margin-left: 1rem; color: var(--color-accent);">
-              {{ "NAVBAR.WELCOME" | translate}}, {{ auth.currentUser().username }}
+              {{ 'NAVBAR.WELCOME' | translate }},
+              {{ auth.currentUser().username }}
             </span>
             <button
               mat-raised-button
@@ -125,7 +143,7 @@ import { LANGUAGES } from '../../constants/core.data';
               style="margin-left: 1rem;"
               (click)="logout()"
             >
-              {{ "COMMON.EXIT" | translate}}
+              {{ 'COMMON.EXIT' | translate }}
             </button>
           }
         }
@@ -134,67 +152,84 @@ import { LANGUAGES } from '../../constants/core.data';
       <!-- ========================================= -->
       <!-- MOBILE NAVIGATION (Visible < 1450px)      -->
       <!-- ========================================= -->
-      <!-- ========================================= -->
-      <!-- MOBILE NAVIGATION (Visible < 1450px)      -->
-      <!-- ========================================= -->
       <div class="mobile-nav">
         <!-- 1. El botón disparador (AHORA SE CIERRA ANTES DEL MENÚ) -->
-        <button mat-icon-button [matMenuTriggerFor]="mobileMenu" class="nav-button" aria-label="Menu">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="mobileMenu"
+          class="nav-button"
+          aria-label="Menu"
+        >
           <mat-icon>menu</mat-icon>
         </button>
 
         <!-- 2. El Menú Principal Móvil -->
         <mat-menu #mobileMenu="matMenu">
-          
           <button mat-menu-item [matMenuTriggerFor]="contactMenu">
-            <mat-icon>contact_mail</mat-icon> 
+            <mat-icon>contact_mail</mat-icon>
             <span>Contacto</span>
           </button>
 
           <button mat-menu-item routerLink="/">
             <mat-icon>work</mat-icon>
-            <span>{{ "NAVBAR.EXPERIENCE" | translate}}</span>
+            <span>{{ 'NAVBAR.EXPERIENCE' | translate }}</span>
           </button>
 
           @if (isBrowserReady()) {
             @if (auth.currentUser().role !== 'Guest') {
               <button mat-menu-item routerLink="/dashboard">
                 <mat-icon>dashboard</mat-icon>
-                <span>{{ "NAVBAR.DASHBOARD" | translate}}</span>
+                <span>{{ 'NAVBAR.DASHBOARD' | translate }}</span>
               </button>
             }
           }
 
           <button mat-menu-item [matMenuTriggerFor]="roleMenu">
             <mat-icon>security</mat-icon>
-            <span>{{ "NAVBAR.ROLE" | translate}}: {{ auth.currentUser().role }}</span>
+            <span
+              >{{ 'NAVBAR.ROLE' | translate }}:
+              {{ auth.currentUser().role }}</span
+            >
           </button>
 
           <button mat-menu-item [matMenuTriggerFor]="langMenu">
             <mat-icon>language</mat-icon>
-            <span>{{ "NAVBAR.LANGUAGE" | translate}}</span>
+            <span>{{ 'NAVBAR.LANGUAGE' | translate }}</span>
           </button>
 
           <button mat-menu-item (click)="toggleTheme()">
             <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
-            <span>{{ "NAVBAR.SWITCH_THEME" | translate}}</span>
+            <span>{{ 'NAVBAR.SWITCH_THEME' | translate }}</span>
           </button>
 
           <!-- SECCIÓN DE AUTENTICACIÓN MÓVIL -->
           @if (isBrowserReady()) {
             @if (auth.currentUser().role === 'Guest') {
-              <button mat-menu-item [disabled]="auth.isLoading()" (click)="simulateSignup()">
+              <button
+                mat-menu-item
+                [disabled]="auth.isLoading()"
+                (click)="simulateSignup()"
+              >
                 <mat-icon>login</mat-icon>
-                <span>{{ auth.isLoading() ? ("COMMON.LOADING" | translate) : ("COMMON.SIGNUP" | translate) }}</span>
+                <span>{{
+                  auth.isLoading()
+                    ? ('COMMON.LOADING' | translate)
+                    : ('COMMON.SIGNUP' | translate)
+                }}</span>
               </button>
             } @else {
               <!-- Mensaje de bienvenida adaptado para menú móvil -->
-              <div style="padding: 8px 16px; font-size: var(--text-sm); color: var(--color-text-muted); outline: none; cursor: default;">
-                {{ "NAVBAR.WELCOME" | translate}}, <strong>{{ auth.currentUser().username }}</strong>
+              <div
+                style="padding: 8px 16px; font-size: var(--text-sm); color: var(--color-text-muted); outline: none; cursor: default;"
+              >
+                {{ 'NAVBAR.WELCOME' | translate }},
+                <strong>{{ auth.currentUser().username }}</strong>
               </div>
               <button mat-menu-item (click)="logout()">
                 <mat-icon>logout</mat-icon>
-                <span style="color: #f44336;">{{ "COMMON.EXIT" | translate}}</span>
+                <span style="color: #f44336;">{{
+                  'COMMON.EXIT' | translate
+                }}</span>
               </button>
             }
           }
@@ -204,34 +239,49 @@ import { LANGUAGES } from '../../constants/core.data';
         <!-- SUB-MENÚS (Declarados fuera para limpieza)-->
         <!-- ========================================= -->
         <mat-menu #contactMenu="matMenu">
-          <button mat-menu-item (click)="copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')">
-            <mat-icon>email</mat-icon> 
+          <button
+            mat-menu-item
+            (click)="
+              copyToClipboard('gabino.muriel.sanchez@gmail.com', 'Email')
+            "
+          >
+            <mat-icon>email</mat-icon>
             <span>gabino.muriel.sanchez&#64;gmail.com</span>
           </button>
-          <button mat-menu-item (click)="copyToClipboard('+34 669 264 151', 'Teléfono')">
-            <mat-icon>phone</mat-icon> 
+          <button
+            mat-menu-item
+            (click)="copyToClipboard('+34 669 264 151', 'Teléfono')"
+          >
+            <mat-icon>phone</mat-icon>
             <span>+34 669 264 151</span>
           </button>
         </mat-menu>
 
         <mat-menu #roleMenu="matMenu">
           <button mat-menu-item (click)="loginAs('Gabino (Admin)', 'Admin')">
-            {{ "NAVBAR.ROLES.ADMIN" | translate}}
+            {{ 'NAVBAR.ROLES.ADMIN' | translate }}
           </button>
           <button mat-menu-item (click)="loginAs('Reclutador', 'User')">
-            {{ "NAVBAR.ROLES.USER" | translate}}
+            {{ 'NAVBAR.ROLES.USER' | translate }}
           </button>
           <button mat-menu-item (click)="logout()">
-            {{ "NAVBAR.ROLES.GUEST" | translate}} ({{ "COMMON.LOGOUT" | translate}})
+            {{ 'NAVBAR.ROLES.GUEST' | translate }} ({{
+              'COMMON.LOGOUT' | translate
+            }})
           </button>
         </mat-menu>
 
         <mat-menu #langMenu="matMenu">
-          <button mat-menu-item (click)="changeLang('es')">{{ "NAVBAR.LANGUAGES.SPANISH" | translate}}</button>
-          <button mat-menu-item (click)="changeLang('en')">{{ "NAVBAR.LANGUAGES.ENGLISH" | translate}}</button>
-          <button mat-menu-item (click)="changeLang('pt')">{{ "NAVBAR.LANGUAGES.PORTUGUESE" | translate}}</button>
+          <button mat-menu-item (click)="changeLang('es')">
+            {{ 'NAVBAR.LANGUAGES.SPANISH' | translate }}
+          </button>
+          <button mat-menu-item (click)="changeLang('en')">
+            {{ 'NAVBAR.LANGUAGES.ENGLISH' | translate }}
+          </button>
+          <button mat-menu-item (click)="changeLang('pt')">
+            {{ 'NAVBAR.LANGUAGES.PORTUGUESE' | translate }}
+          </button>
         </mat-menu>
-
       </div>
     </mat-toolbar>
   `,
@@ -261,21 +311,32 @@ import { LANGUAGES } from '../../constants/core.data';
         color: var(--color-text-inverse) !important;
       }
 
-      .mobile-nav { display: none; }
+      .mobile-nav {
+        display: none;
+      }
       @media (max-width: 1450px) {
-      .desktop-nav { display: none; }
-      .mobile-nav { display: block; }
-    }
+        .desktop-nav {
+          display: none;
+        }
+        .mobile-nav {
+          display: block;
+        }
+      }
+
+      .nav-button {
+        vertical-align: middle !important;
+      }
     `,
   ],
 })
 export class HeaderComponent {
   auth = inject(AuthService);
   private translate = inject(TranslateService);
-  languages = LANGUAGES
+  languages = LANGUAGES;
   isBrowserReady = signal<boolean>(false);
   isDarkMode = signal<boolean>(false);
   private dialog = inject(MatDialog);
+  private router = inject(Router);
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.translate.addLangs(this.languages);
@@ -335,7 +396,7 @@ export class HeaderComponent {
   copyToClipboard(text: string, type: string) {
     navigator.clipboard.writeText(text).then(() => {
       // Shows a sleek notification for 3 seconds
-      this.snackBar.open(`${type} copiado al portapapeles!`, 'Cerrar', {
+      this.snackBar.open(`${type} copied!`, 'Close', {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
@@ -353,4 +414,12 @@ export class HeaderComponent {
       }
     }
   }
+
+  navHome() {
+  // 1. Navigate to root
+  this.router.navigate(['/']);
+  
+  // 2. Smooth scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 }

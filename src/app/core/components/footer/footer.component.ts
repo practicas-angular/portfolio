@@ -48,7 +48,7 @@ import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
           </button>
           <button
             mat-icon-button
-            (click)="copyToClipboard('+34 669 264 151', 'Teléfono')"
+            (click)="copyToClipboard('+34 669 264 151', 'Phone')"
             matTooltip="'CONTACT.COPY_PHONE' | translate"
           >
             <mat-icon>phone</mat-icon>

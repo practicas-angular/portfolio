@@ -352,7 +352,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     this.sseSubscription = this.wikiService.edits$.subscribe((newEdit) => {
       this.recentEdits.update((currentEdits) => {
         const updatedList = [newEdit, ...currentEdits];
-        return updatedList.slice(0, 10);
+        return updatedList.slice(0, 5);
       });
 
       if (isPlatformBrowser(this.platformId)) {

@@ -162,7 +162,7 @@
     },
     "WIKIPEDIA": {
       "TITLE": "Wikipedia Edits",
-      "SUBTITLE": "Showing the last 10 global changes live.",
+      "SUBTITLE": "Showing the last 5 global changes live.",
       "EDITED_BY": "Edited by:",
       "VIEW_ARTICLE": "View Article",
       "WAITING": "Waiting for live data from Wikipedia..."

@@ -162,7 +162,7 @@
     },
     "WIKIPEDIA": {
       "TITLE": "Ediciones en Wikipedia",
-      "SUBTITLE": "Mostrando los últimos 10 cambios globales en vivo.",
+      "SUBTITLE": "Mostrando los últimos 5 cambios globales en vivo.",
       "EDITED_BY": "Editado por:",
       "VIEW_ARTICLE": "Ver Artículo",
       "WAITING": "Esperando datos en vivo de Wikipedia..."

@@ -12,7 +12,7 @@ export class WikipediaSseService {
   private editsSubject = new Subject<WikipediaEdit>();
   
   public edits$: Observable<WikipediaEdit> = this.editsSubject.asObservable().pipe(
-    throttleTime(5000) 
+    throttleTime(2000) 
   );
 
   constructor(
