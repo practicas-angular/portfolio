@@ -7,7 +7,7 @@ export const routes: Routes = [
     loadComponent: () => 
       import('./features/resume/pages/resume-page/resume-page.component')
       .then(m => m.ResumePageComponent),
-    title: 'Gabino Muriel | Resume'
+    title: 'Gabino Muriel | Portfolio'
   },
   {
     path: 'dashboard',
@@ -16,7 +16,7 @@ export const routes: Routes = [
     loadComponent: () => 
       import('./features/dashboard/pages/dashboard-page/dashboard-page.component')
       .then(m => m.DashboardPageComponent),
-    title: 'Gabino Muriel | Live Dashboard'
+    title: 'Gabino Muriel | Dashboard'
   },
   {
     path: '**',
