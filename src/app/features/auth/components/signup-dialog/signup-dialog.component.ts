@@ -25,7 +25,7 @@ export class SignupDialogComponent {
   dialogRef = inject(MatDialogRef<SignupDialogComponent>);
 
   // Default value, just like your old prompt [2]
-  username = 'Reclutador_Tech';
+  username = 'Reclutador';
 
   cancel() {
     this.dialogRef.close(); // Closes without returning data
